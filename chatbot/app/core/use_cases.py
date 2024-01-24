@@ -1,9 +1,9 @@
-from app.core.gpt2_services import GPT2Service
+from app.core.qa_services import QuestionAnsweringSystem
+from app.config import Config
 
-class GenerateTextUseCase:
+class QAUseCase:
     def __init__(self):
-        self.gpt2_service = GPT2Service()
+        self.questionAswering = QuestionAnsweringSystem(Config.RETRIEVER_PATH, Config.READER_PATH, Config.VOCAB_SIZE, Config.EMBEDDING_DIM, Config.HIDDEN_SIZE, Config.MAX_SEQ_LENGTH)
 
-    def execute(self, input_text):
-        # Additional business logic can be added here if needed
-        return self.gpt2_service.generate_text(input_text)
+    def execute(self, question):
+        return self.questionAswering.answer_question(question)
