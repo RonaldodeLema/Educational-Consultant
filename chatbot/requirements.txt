@@ -1,3 +1,6 @@
+torch
 flask
 transformers
-torch
+underthesea
+numpy
+rouge
