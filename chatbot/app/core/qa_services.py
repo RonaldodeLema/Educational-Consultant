@@ -1,6 +1,7 @@
 from app.core.utils.retriever import RetrievalQA
 from app.core.utils.models import BiLSTMReader
 from transformers import AutoTokenizer
+from rouge import Rouge
 
 import torch
 
@@ -19,6 +20,12 @@ class QuestionAnsweringSystem:
         # Initialize the tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
 
+    def calculate_rouge_scores(self, reference, predicted):
+        rouge = Rouge()
+        scores = rouge.get_scores(predicted, reference)
+        rouge_l_score = scores[0]['rouge-l']['f'] 
+        return rouge_l_score
+
     def answer_question(self, query):
         # Retrieve context using the retriever
         retrieved_context = self.retriever.retrieve_context(query)
@@ -31,7 +38,6 @@ class QuestionAnsweringSystem:
         with torch.no_grad():
             start_pred, end_pred = self.reader(inputs['input_ids'], inputs['attention_mask'])
 
-        # Post-process the predictions
         start_index = torch.argmax(start_pred)
         end_index = torch.argmax(end_pred)
 
@@ -40,5 +46,11 @@ class QuestionAnsweringSystem:
 
         # Convert the answer span back to tokens using the tokenizer
         predicted_answer = self.tokenizer.decode(answer_span)
+        rouge_scores = self.calculate_rouge_scores(retrieved_context, query)
 
-        return predicted_answer
+
+        return {
+            'predicted_answer': predicted_answer,
+            'context': retrieved_context,
+            'rouge_scores': rouge_scores
+        }
