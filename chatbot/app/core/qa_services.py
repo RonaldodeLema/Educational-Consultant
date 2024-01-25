@@ -29,7 +29,6 @@ class QuestionAnsweringSystem:
     def answer_question(self, query):
         # Retrieve context using the retriever
         retrieved_context = self.retriever.retrieve_context(query)
-        print("Context:", retrieved_context)
 
         # Tokenize the input using the tokenizer
         inputs = self.tokenizer(query, retrieved_context, return_tensors='pt', max_length=self.reader.max_seq_length, padding='max_length', truncation=True)

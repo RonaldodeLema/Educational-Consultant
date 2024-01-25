@@ -128,7 +128,6 @@ def qa():
     user_id_str = str(g.user.get('_id')) if g.user.get('_id') else None
 
     # Count the number of words in the generated answer
-    print(answer['predicted_answer'])
     word_count = len(answer['predicted_answer'].split())
 
     # Increase the word count in the word generation limit
