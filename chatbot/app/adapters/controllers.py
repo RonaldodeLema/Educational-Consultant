@@ -119,7 +119,7 @@ def qa():
     question = data.get('question', '')
 
     # Check if the word generation limit is exceeded for the current user
-    if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 100):
+    if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 1000):
         return jsonify({'message': 'Word generation limit exceeded in 1 hour'}), 429
 
     use_case = QAUseCase()
@@ -133,7 +133,22 @@ def qa():
     # Increase the word count in the word generation limit
     update_word_limit(g.user['username'], 'word_generation_limits', word_count)
 
+    # Save the question, answer, and context in MongoDB
+    record_qa(question, answer['predicted_answer'], answer.get('context', ''), g.user['username'])
+
     return jsonify({'answer': answer, 'user': {'_id': user_id_str}})
 
-if __name__ == '__main__':
-    app.run(debug=app.config['DEBUG'])
+
+def record_qa(question, answer, context, username):
+    db = get_db()
+    qa_collection = db['qa_records']
+
+    qa_record = {
+        'username': username,
+        'question': question,
+        'answer': answer,
+        'context': context,
+        'timestamp': datetime.utcnow()
+    }
+
+    qa_collection.insert_one(qa_record)
