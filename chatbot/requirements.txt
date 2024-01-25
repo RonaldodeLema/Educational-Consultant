@@ -4,3 +4,4 @@ transformers
 underthesea
 numpy
 rouge
+pymongo
