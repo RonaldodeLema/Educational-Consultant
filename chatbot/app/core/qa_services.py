@@ -18,7 +18,7 @@ class QuestionAnsweringSystem:
         self.reader.eval()
 
         # Initialize the tokenizer
-        self.tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+        self.tokenizer = AutoTokenizer.from_pretrained('vinai/phobert-base')
 
     def calculate_rouge_scores(self, reference, predicted):
         rouge = Rouge()
