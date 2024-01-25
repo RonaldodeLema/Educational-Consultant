@@ -119,7 +119,7 @@ def qa():
     question = data.get('question', '')
 
     # Check if the word generation limit is exceeded for the current user
-    if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 70):
+    if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 100):
         return jsonify({'message': 'Word generation limit exceeded in 1 hour'}), 429
 
     use_case = QAUseCase()
