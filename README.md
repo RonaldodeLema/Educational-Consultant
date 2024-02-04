@@ -15,9 +15,9 @@ this is project Web with AI chatbot
 ![HTML5 Logo](https://img.shields.io/badge/html-e34f26?style=for-the-badge&logo=html5&logoColor=ffffff)
 ![CSS Logo](https://img.shields.io/badge/css-1572b6?style=for-the-badge&logo=css3&logoColor=ffffff)
 ![NodeJS Logo](https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=node.js&logoColor=ffffff)
-![MongoDB Logo](https://webassets.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png)
-![Mongoose Logo](https://mongoosejs.com/docs/images/mongoose5_62x30_transparent.png)
-![Python Logo](https://www.python.org/static/community_logos/python-logo.png)
+![MongoDB Logo](https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose Logo](https://img.shields.io/badge/Mongoose-%23880000.svg?&style=for-the-badge&logo=mongoose&logoColor=white)
+![Python Logo](https://img.shields.io/badge/Python-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white)
 
 ## Các bước để chạy project
 
