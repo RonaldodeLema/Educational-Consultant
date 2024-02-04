@@ -12,7 +12,8 @@ this is project Web with AI chatbot
 
 ## Các công nghệ sử dụng
 
-![HTML5 Logo](https://img.shields.io/badge/html-e34f26?style=for-the-badge&logo=html5&logoColor=ffffff)
+![ReactJS Logo](https://img.shields.io/badge/React-%2361DAFB.svg?&style=for-the-badge&logo=react&logoColor=white)
+![Bootstrap Logo](https://img.shields.io/badge/Bootstrap-%237952B3.svg?&style=for-the-badge&logo=bootstrap&logoColor=white)
 ![CSS Logo](https://img.shields.io/badge/css-1572b6?style=for-the-badge&logo=css3&logoColor=ffffff)
 ![NodeJS Logo](https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=node.js&logoColor=ffffff)
 ![MongoDB Logo](https://img.shields.io/badge/MongoDB-%234ea94b.svg?&style=for-the-badge&logo=mongodb&logoColor=white)
