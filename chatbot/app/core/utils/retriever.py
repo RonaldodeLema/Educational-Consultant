@@ -28,6 +28,38 @@ class RetrievalQA:
         most_similar_index = np.argmax(similarities)
 
         return self.contexts[most_similar_index]
+    
+    def score_question(self, input_question):
+        input_question_embedding = self.vectorizer.transform([input_question])
+
+        similarities = cosine_similarity(input_question_embedding, self.question_embeddings).flatten()
+        max_similarity = np.max(similarities)
+
+        return max_similarity
+
+    def _check_similarity(self, new_question_embedding):
+        similarities = cosine_similarity(new_question_embedding, self.question_embeddings).flatten()
+        max_similarity = np.max(similarities)
+        return max_similarity, np.argmax(similarities)
+
+    def update_model(self, new_questions, new_contexts, similarity_threshold=0.8):
+        if self.model_type == 'tfidf':
+            for new_question, new_context in zip(new_questions, new_contexts):
+                new_question_embedding = self.vectorizer.transform([new_question])
+
+                max_similarity, most_similar_index = self._check_similarity(new_question_embedding)
+
+                if max_similarity >= similarity_threshold:
+                    # If similarity is high, overwrite the existing question and context
+                    print(self.questions[most_similar_index])
+                    self.questions[most_similar_index] = new_question
+                    self.contexts[most_similar_index] = new_context
+                else:
+                    # If similarity is low, add the new question and context
+                    self.questions.append(new_question)
+                    self.contexts.append(new_context)
+
+            self.question_embeddings = self.vectorizer.fit_transform(self.questions)
 
     def save_model(self, filename):
         with open(filename, 'wb') as file:
@@ -35,6 +67,7 @@ class RetrievalQA:
 
     @classmethod
     def load_model(cls, filename):
+        print(filename)
         with open(filename, 'rb') as file:
             model = pickle.load(file)
         return model

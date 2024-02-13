@@ -6,7 +6,7 @@ from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 from datetime import datetime, timedelta
-
+import pandas as pd
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -119,7 +119,7 @@ def qa():
     question = data.get('question', '')
 
     # Check if the word generation limit is exceeded for the current user
-    if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 1000):
+    if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 10000):
         return jsonify({'message': 'Word generation limit exceeded in 1 hour'}), 429
 
     use_case = QAUseCase()
@@ -134,12 +134,35 @@ def qa():
     update_word_limit(g.user['username'], 'word_generation_limits', word_count)
 
     # Save the question, answer, and context in MongoDB
-    record_qa(question, answer['predicted_answer'], answer.get('context', ''), g.user['username'])
+    record_qa(question, answer['predicted_answer'], answer.get('context', ''), g.user['username'], answer.get('score', 0))
 
     return jsonify({'answer': answer, 'user': {'_id': user_id_str}})
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'csv'}
 
-def record_qa(question, answer, context, username):
+@token_required
+@app.route('/api/fine-tune', methods=['POST'])
+def fine_tune():
+    if 'data_csv' not in request.files:
+        return jsonify({'error': 'No file part'})
+
+    file = request.files['data_csv']
+
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'})
+
+    if file and allowed_file(file.filename):
+        df = pd.read_csv(file, encoding='utf-8')
+        use_case = QAUseCase()
+        message = use_case.fine_tuning(df, g.user['username'])
+
+        return jsonify({'message': message})
+    else:
+        return jsonify({'error': 'Invalid file type'})
+
+
+def record_qa(question, answer, context, username, score):
     db = get_db()
     qa_collection = db['qa_records']
 
@@ -148,6 +171,7 @@ def record_qa(question, answer, context, username):
         'question': question,
         'answer': answer,
         'context': context,
+        'score': score,
         'timestamp': datetime.utcnow()
     }
 

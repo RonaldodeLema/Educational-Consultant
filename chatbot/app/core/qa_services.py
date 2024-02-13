@@ -20,12 +20,6 @@ class QuestionAnsweringSystem:
         # Initialize the tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained('vinai/phobert-base')
 
-    def calculate_rouge_scores(self, reference, predicted):
-        rouge = Rouge()
-        scores = rouge.get_scores(predicted, reference)
-        rouge_l_score = scores[0]['rouge-l']['f'] 
-        return rouge_l_score
-
     def answer_question(self, query):
         # Retrieve context using the retriever
         retrieved_context = self.retriever.retrieve_context(query)
@@ -45,11 +39,10 @@ class QuestionAnsweringSystem:
 
         # Convert the answer span back to tokens using the tokenizer
         predicted_answer = self.tokenizer.decode(answer_span)
-        rouge_scores = self.calculate_rouge_scores(retrieved_context, query)
-
+        scores = self.retriever.score_question(query)
 
         return {
             'predicted_answer': predicted_answer,
             'context': retrieved_context,
-            'rouge_scores': rouge_scores
+            'score': scores
         }
