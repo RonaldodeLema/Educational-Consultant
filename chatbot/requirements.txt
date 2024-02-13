@@ -4,6 +4,5 @@ transformers
 underthesea
 numpy
 pandas
-rouge
 pymongo
 pymongo[srv]

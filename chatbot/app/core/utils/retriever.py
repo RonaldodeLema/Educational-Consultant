@@ -51,7 +51,6 @@ class RetrievalQA:
 
                 if max_similarity >= similarity_threshold:
                     # If similarity is high, overwrite the existing question and context
-                    print(self.questions[most_similar_index])
                     self.questions[most_similar_index] = new_question
                     self.contexts[most_similar_index] = new_context
                 else:
@@ -67,7 +66,6 @@ class RetrievalQA:
 
     @classmethod
     def load_model(cls, filename):
-        print(filename)
         with open(filename, 'rb') as file:
             model = pickle.load(file)
         return model

@@ -7,8 +7,6 @@ class QAUseCase:
     def __init__(self,organization_name="default"):
         self.reader_path = Config.MODEL_PATH+organization_name+"/" + organization_name + '_reader_model.pth'
         self.retriever_path = Config.MODEL_PATH+organization_name+"/" + organization_name + '_retriever.pkl'
-        print(self.reader_path)
-        print(self.retriever_path)
         self.questionAswering = QuestionAnsweringSystem(self.retriever_path, self.reader_path, Config.VOCAB_SIZE, Config.EMBEDDING_DIM, Config.HIDDEN_SIZE, Config.MAX_SEQ_LENGTH)
         self.organization_name = organization_name
 

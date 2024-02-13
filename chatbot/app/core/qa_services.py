@@ -1,7 +1,7 @@
 from app.core.utils.retriever import RetrievalQA
 from app.core.utils.models import BiLSTMReader
 from transformers import AutoTokenizer
-from rouge import Rouge
+import re
 
 import torch
 
@@ -41,8 +41,12 @@ class QuestionAnsweringSystem:
         predicted_answer = self.tokenizer.decode(answer_span)
         scores = self.retriever.score_question(query)
 
+        answer = predicted_answer
+        if("</s>" in predicted_answer or "<s>" in predicted_answer):
+            answer = predicted_answer.replace(query,"").replace("</s>","").replace("<s>","").strip()
+
         return {
-            'predicted_answer': predicted_answer,
+            'predicted_answer': answer,
             'context': retrieved_context,
             'score': scores
         }

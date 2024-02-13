@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import secrets
 from datetime import datetime, timedelta
 import pandas as pd
+import os
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -121,11 +122,14 @@ def qa():
     # Check if the word generation limit is exceeded for the current user
     if rate_limit_exceeded(g.user['username'], 'word_generation_limits', timedelta(hours=1), 10000):
         return jsonify({'message': 'Word generation limit exceeded in 1 hour'}), 429
+    
+    model_path = Config.MODEL_PATH + g.user['username']
+    org_name = "default"
+    if os.path.exists(model_path):
+        org_name = g.user['username']
 
-    use_case = QAUseCase()
+    use_case = QAUseCase(organization_name=org_name)
     answer = use_case.execute(question)
-
-    user_id_str = str(g.user.get('_id')) if g.user.get('_id') else None
 
     # Count the number of words in the generated answer
     word_count = len(answer['predicted_answer'].split())
@@ -136,7 +140,10 @@ def qa():
     # Save the question, answer, and context in MongoDB
     record_qa(question, answer['predicted_answer'], answer.get('context', ''), g.user['username'], answer.get('score', 0))
 
-    return jsonify({'answer': answer, 'user': {'_id': user_id_str}})
+    return jsonify({'answer': {
+        'predicted_answer': answer['predicted_answer'],
+        'score': answer.get('score', 0)
+    }})
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'csv'}
