@@ -43,7 +43,7 @@ class QuestionAnsweringSystem:
 
         answer = predicted_answer
         if("</s>" in predicted_answer or "<s>" in predicted_answer):
-            answer = predicted_answer.replace(query,"").replace("</s>","").replace("<s>","").strip()
+            answer = predicted_answer.replace(query,"").replace("</s>","").replace("<s>","").replace("<pad>","").strip()
 
         return {
             'predicted_answer': answer,
