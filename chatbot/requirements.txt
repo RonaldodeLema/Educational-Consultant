@@ -3,5 +3,6 @@ flask
 transformers
 underthesea
 numpy
-rouge
+pandas
 pymongo
+pymongo[srv]

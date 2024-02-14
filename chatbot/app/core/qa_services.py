@@ -1,7 +1,7 @@
 from app.core.utils.retriever import RetrievalQA
 from app.core.utils.models import BiLSTMReader
 from transformers import AutoTokenizer
-from rouge import Rouge
+import re
 
 import torch
 
@@ -19,12 +19,6 @@ class QuestionAnsweringSystem:
 
         # Initialize the tokenizer
         self.tokenizer = AutoTokenizer.from_pretrained('vinai/phobert-base')
-
-    def calculate_rouge_scores(self, reference, predicted):
-        rouge = Rouge()
-        scores = rouge.get_scores(predicted, reference)
-        rouge_l_score = scores[0]['rouge-l']['f'] 
-        return rouge_l_score
 
     def answer_question(self, query):
         # Retrieve context using the retriever
@@ -45,11 +39,14 @@ class QuestionAnsweringSystem:
 
         # Convert the answer span back to tokens using the tokenizer
         predicted_answer = self.tokenizer.decode(answer_span)
-        rouge_scores = self.calculate_rouge_scores(retrieved_context, query)
+        scores = self.retriever.score_question(query)
 
+        answer = predicted_answer
+        if("</s>" in predicted_answer or "<s>" in predicted_answer):
+            answer = predicted_answer.replace(query,"").replace("</s>","").replace("<s>","").replace("<pad>","").strip()
 
         return {
-            'predicted_answer': predicted_answer,
+            'predicted_answer': answer,
             'context': retrieved_context,
-            'rouge_scores': rouge_scores
+            'score': scores
         }
