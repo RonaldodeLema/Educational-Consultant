@@ -8,6 +8,7 @@ import secrets
 from datetime import datetime, timedelta
 import pandas as pd
 import os
+from flask_cors import CORS
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -89,7 +90,13 @@ def register():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
+    repassword = data.get('repassword')
 
+    # Check if the passwords match
+    if password != repassword:
+        return jsonify({'message': 'Passwords do not match'}), 400
+
+    # Check if the username is already taken
     if get_db()['users'].find_one({'username': username}):
         return jsonify({'message': 'Username is already taken'}), 400
 
@@ -99,7 +106,65 @@ def register():
     db = get_db()
     db['users'].insert_one({'username': username, 'password': hashed_password, 'api_key': api_key})
 
-    return jsonify({'message': 'User registered successfully', 'api_key': api_key}), 201
+    return jsonify({'message': 'User registered successfully'}), 200
+
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    db = get_db()
+    user = db['users'].find_one({'username': username})
+
+    if user and check_password_hash(user['password'], password):
+
+        return jsonify({'message': 'Login successful', 'user': {
+            'username': user['username'],
+            'api_key': user['api_key'],
+            'full_name': user.get('full_name', ''),
+            'email': user.get('email', ''),
+            'phone': user.get('phone', ''),
+            'address': user.get('address', '')
+        }}), 200
+    else:
+        return jsonify({'message': 'Invalid credentials'}), 401
+
+@token_required
+@app.route('/api/update_profile', methods=['PUT'])
+def update_profile():
+    data = request.get_json()
+    username = data.get('username')
+    api_key = data.get('api_key')
+
+    # Verify the user with the provided username and API key
+    user = get_db()['users'].find_one({'username': username, 'api_key': api_key})
+
+    if not user:
+        return jsonify({'message': 'Invalid credentials'}), 401
+
+    # Update additional user profile information
+    full_name = data.get('full_name')
+    email = data.get('email')
+    phone = data.get('phone')
+    address = data.get('address')
+
+    update_data = {}
+
+    if full_name:
+        update_data['full_name'] = full_name
+    if email:
+        update_data['email'] = email
+    if phone:
+        update_data['phone'] = phone
+    if address:
+        update_data['address'] = address
+
+    get_db()['users'].update_one({'username': username, 'api_key': api_key}, {'$set': update_data})
+
+    return jsonify({'message': 'Profile updated successfully',
+                    'status_code':200}), 200
 
 @app.route('/api/get-api-key', methods=['POST'])
 def get_api_key():
@@ -148,25 +213,28 @@ def qa():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'csv'}
 
-@token_required
 @app.route('/api/fine-tune', methods=['POST'])
+@token_required
 def fine_tune():
     if 'data_csv' not in request.files:
-        return jsonify({'error': 'No file part'})
+        return jsonify({'message': 'No file part'}), 400
 
     file = request.files['data_csv']
 
     if file.filename == '':
-        return jsonify({'error': 'No selected file'})
+        return jsonify({'message': 'No selected file'}), 400
 
     if file and allowed_file(file.filename):
         df = pd.read_csv(file, encoding='utf-8')
-        use_case = QAUseCase()
-        message = use_case.fine_tuning(df, g.user['username'])
-
-        return jsonify({'message': message})
+        required_columns = ['question', 'answer', 'context']
+        if all(col in df.columns for col in required_columns):
+            use_case = QAUseCase(organization_name=g.user['username'])
+            message = use_case.fine_tuning(df)
+            return jsonify({'message': message}), 200
+        else:
+            return jsonify({'message': "five csv has the required columns: 'question', 'answer', 'context'"}), 400
     else:
-        return jsonify({'error': 'Invalid file type'})
+        return jsonify({'message': 'Invalid file type'}), 400
 
 
 def record_qa(question, answer, context, username, score):
