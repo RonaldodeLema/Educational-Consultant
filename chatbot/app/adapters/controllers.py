@@ -45,7 +45,7 @@ def authenticate_user(username, password):
     if not existing_user or not check_password_hash(existing_user['password'], password):
         return None  # User not found or incorrect password
 
-    return existing_user['api_key']
+    return  existing_user['api_key']
 
 def rate_limit_exceeded(username, limit_collection, limit_duration, max_limit):
     db = get_db()
