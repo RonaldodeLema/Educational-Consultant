@@ -12,7 +12,7 @@ class FineTuningRetrieval:
 
     def fine_tune(self, new_df):
         self.loaded_model.update_model(new_df.question.tolist(), new_df.context.tolist())
-        self.loaded_model.save_model(Config.MODEL_PATH + self.organization_name + '_retriever.pkl')
+        self.loaded_model.save_model(Config.MODEL_PATH + self.organization_name +"/" + self.organization_name + '_retriever.pkl')
         return 'Fine-tuning successful'
     
 class FineTuningReader:
