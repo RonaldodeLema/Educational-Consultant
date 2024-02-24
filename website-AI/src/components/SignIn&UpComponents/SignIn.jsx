@@ -33,6 +33,7 @@ export const SignIn = ({ setUser }) => {
 			setError('Tài khoản hoặc mật khẩu không đúng!');
 		  }
 		} catch (error) {
+			console.log(error.response.status)
 			if (error.response.status === 401){
 				setError('Tài khoản hoặc mật khẩu không đúng!');
 				}
