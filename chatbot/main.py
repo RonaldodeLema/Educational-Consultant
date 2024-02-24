@@ -3,6 +3,7 @@ from app.config import DevelopmentConfig, ProductionConfig
 from app.core.utils.retriever import RetrievalQA
 from flask_cors import CORS
 
+
 if __name__ == '__main__':
     app.config.from_object(DevelopmentConfig if app.config['DEBUG'] else ProductionConfig)
     CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://localhost:4000"]}}), 
