@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import makeAxiosReq from '../apis/makeAxiosReq';
 import { useNavigate } from 'react-router-dom';
 
-export const Login = ({ setErrorMessage, setErrorCode, setErrorStack, setApiKey }) => {
+const Login = ({ setErrorMessage, setErrorCode, setErrorStack, setApiKey }) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const { login } = useAuth();
@@ -14,12 +14,7 @@ export const Login = ({ setErrorMessage, setErrorCode, setErrorStack, setApiKey 
 
 		await makeAxiosReq
 			.post('/login', { username, password })
-			.then((res) => {
-				if (res.data.ok) {
-					setApiKey(res.data.user.api_key);
-					login(res.data.user.username)
-				}
-			})
+			.then(async (res) => res.data.ok && login(res.data.user))
 			.catch((err) => {
 				if (err.response && err.response.status === 404) {
 					err.code && setErrorCode(err.response.status);
@@ -62,3 +57,5 @@ export const Login = ({ setErrorMessage, setErrorCode, setErrorStack, setApiKey 
 		</div>
 	);
 };
+
+export default Login;

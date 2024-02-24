@@ -4,52 +4,74 @@ import bcrypt from 'bcrypt';
 import 'dotenv/config';
 
 import UserBase from '../models/UserBase.js';
-
+import MessageBase from '../models/MessageBase.js';
 const router = Router();
 const instance = axios.create({ baseURL: 'http://127.0.0.1:5000/api' });
 const saltRounds = 10;
+
+router.get('/logout', async (req, res, next) => {
+  delete req.session.currUser;
+  return res.status(200).json({ ok: true });
+});
 
 router.post('/register', async (req, res, next) => {
   const { username, password } = req.body;
   try {
     const isExist = await UserBase.findOne({ username }).lean();
-    if (isExist) return res.status(409).json({ message: `Username with ${username} existed!` });
+    if (isExist) return res.status(409).json({ message: `Username với tên là "${username}" đã tồn tại!` });
     bcrypt.hash(password, saltRounds, async function (err, hash) {
       await UserBase.create({ username, password: hash });
-      res.status(200).json({ ok: true, message: 'Create a new account successful' });
+      return res.status(200).json({ ok: true, message: 'Create a new account successful' });
     });
   } catch (error) {
-    return res.status(404).json({ message: `Some errors ocurred in POST /register!` });
+    return res.json({ message: `Some errors ocurred in POST /register!` });
   }
 });
 
 router.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
   const currUser = await UserBase.findOne({ username }).lean();
+  if (!currUser) return res.status(404).json({ message: `Not found user with username is ${username}` });
   const match = await bcrypt.compare(password, currUser.password);
-  match && res.status(200).json({ ok: true, user: { username } });
+  req.session.currUser = { _id: currUser._id, username };
+  return match && res.status(200).json({ ok: true, user: { _id: currUser._id, username } });
+  // const instance = axios.create({ baseURL: process.env.BASE_URL });
+  // await instance.post(process.env.GET_API_KEY_RP, {
+  //   "username": "admin",
+  //   "password": "admin"
+  // })
+  //   .then(async (response) => {
+  //     // console.log(response.data.api_key);
+  //     match && res.status(200).json({
+  //       ok: true, user: { _id: currUser._id, username }, api_key: response.data.api_key
+  //     });
+  //   }).catch((QA_obj_errer) => {
+  //     // add throw error logic
+  //     console.error(QA_obj_errer.message);
+  //     console.error(QA_obj_errer.statusCode);
+  //     console.error(QA_obj_errer.statusMessage);
+  //   });
 });
 
 router.post('/chat', async (req, res, next) => {
-  const { msgTextInput, api_key } = req.body;
+  const { _id, msgTextInput, apiKey } = req.body;
 
-  instance.defaults.headers.common.Authorization = api_key;
+  if (_id) await MessageBase.create({ msgContent: msgTextInput, sender: _id, sendAt: Date.now() });
 
+  instance.defaults.headers.common.Authorization = apiKey;
   await instance.post(process.env.GET_QA_RP, {
     "question": msgTextInput
   })
     .then(async (QA_obj_res) => {
-      console.log(QA_obj_res.data);
-
-      const rouge_scores = QA_obj_res.data.answer.rouge_scores;
+      const score = QA_obj_res.data.answer.score;
       const predicted_answer = QA_obj_res.data.answer.predicted_answer;
-      const context = QA_obj_res.data.answer.context;
 
-      rouge_scores <= 0.1
+      console.log(`rouge score: ` + score);
+      console.log(`predicted_answer: ` + predicted_answer);
+
+      return score <= 0.6
         ? res.status(200).json({ 'message': 'Mình chưa được huấn luyện để trả lời vấn đề này, bạn hỏi câu hỏi khác giúp mình nhé!' })
-        : predicted_answer === '' ? res.status(200).json({ 'message': context }) : res.status(200).json({ 'message': predicted_answer });
-
-      res.end();
+        : res.status(200).json({ 'message': predicted_answer });
     })
     .catch((QA_obj_errer) => {
       // add throw error logic
@@ -58,6 +80,20 @@ router.post('/chat', async (req, res, next) => {
       console.error(QA_obj_errer.statusMessage);
     });;
 });
+
+router.post('/get_api_key', async (req, res, next) => {
+  const { username, password } = req.body;
+  if (username === 'tdtu' && password === '123456') {
+    const response = await instance.post(process.env.GET_API_KEY_RP, {
+      username, password
+    });
+
+    return res.status(200).json({ ok: true, apiKey: response.data.api_key });
+  }
+
+  return res.status(404).json('Unauthorization');
+});
+
 
 router.post('/test', async (req, res, next) => {
   let api_key;
@@ -112,8 +148,6 @@ router.get('/chat', (req, res, next) => {
   res.render('chat', { title: 'Chat page' });
 });
 
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', (req, res, next) => res.render('index', { title: 'Express' }));
 
 export default router;

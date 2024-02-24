@@ -8,7 +8,6 @@ import app from '../app.js';
 import debugModule from 'debug';
 import { createServer } from 'http';
 import connect2db from '../database/connect2db.js';
-import session from 'express-session';
 import 'dotenv/config';
 
 const debug = debugModule('caws-v3:server');
@@ -19,13 +18,8 @@ const debug = debugModule('caws-v3:server');
 connect2db.conn();
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-app.set('trust proxy', 1); // trust first proxy
-app.use(session({
-  secret: process.env.SECRET_SS,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}));
+// app.set('trust proxy', 1); // trust first proxy
+
 /**
  * Create HTTP server.
  */
