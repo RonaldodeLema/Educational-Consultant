@@ -3,6 +3,7 @@ import createError from 'http-errors';
 import { dirname, join } from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import session from 'express-session';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,12 +24,20 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(join(__dirname, 'public')));
-
+app.use(session({
+    secret: process.env.SECRET_SS || `thisismysecret`,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: true }
+}));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS"); // Add other methods if needed
+    res.header("Access-Control-Allow-Credentials", "true"); // Set to true if using credentials
     next();
 });
+
 
 app.use('/users', usersRouter);
 app.use('/', indexRouter);

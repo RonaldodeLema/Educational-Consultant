@@ -22,6 +22,24 @@ this is project Web with AI chatbot
 
 ## Các bước để chạy project
 
+## Các thay đổi
+
+Để chạy FE ở port tùy ý
+
+Cách 1:
+
+- Tạo 1 file .env
+
+- Mở file đó và gõ PORT=`port`
+
+- Lưu file và chạy bình thường project sẽ được chạy ở port đã cấu hình
+
+Cách 2:
+
+- Chạy lệnh `npm run dev`  hoặc  `pnpm run dev` hoặc  `yarn run dev`
+
+- Đổi port trong lệnh này có tác dụng tương tự cách 1
+
 ## License
 
 [MIT](https://github.com/mrcaidev/hooks/tree/master/LICENSE)

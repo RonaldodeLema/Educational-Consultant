@@ -1,165 +1,123 @@
-import { useState } from 'react';
-import emailjs from 'emailjs-com';
 import React from 'react';
 
-const initialState = {
-	name: '',
-	email: '',
-	message: '',
-};
-
-export const Contact = (props) => {
-	const [{ name, email, message }, setState] = useState(initialState);
-
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setState((prevState) => ({ ...prevState, [name]: value }));
-	};
-	const clearState = () => setState({ ...initialState });
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(name, email, message);
-
-		{
-			/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */
-		}
-
-		emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_PUBLIC_KEY').then(
-			(result) => {
-				console.log(result.text);
-				clearState();
-			},
-			(error) => {
-				console.log(error.text);
-			},
-		);
-	};
+const Contact = () => {
 	return (
-		<div>
-			<div id="contact">
-				<div className="container">
-					<div className="col-md-8">
-						<div className="row">
-							<div className="section-title">
-								<h2>Get In Touch</h2>
-								<p>
-									Please fill out the form below to send us an email and we will get back to you as
-									soon as possible.
-								</p>
-							</div>
-							<form name="sentMessage" validate="true" onSubmit={handleSubmit}>
-								<div className="row">
-									<div className="col-md-6">
-										<div className="form-group">
-											<input
-												type="text"
-												id="name"
-												name="name"
-												className="form-control"
-												placeholder="Name"
-												required
-												onChange={handleChange}
-											/>
-											<p className="help-block text-danger"></p>
-										</div>
-									</div>
-									<div className="col-md-6">
-										<div className="form-group">
-											<input
-												type="email"
-												id="email"
-												name="email"
-												className="form-control"
-												placeholder="Email"
-												required
-												onChange={handleChange}
-											/>
-											<p className="help-block text-danger"></p>
-										</div>
-									</div>
-								</div>
-								<div className="form-group">
-									<textarea
-										name="message"
-										id="message"
-										className="form-control"
-										rows="4"
-										placeholder="Message"
-										required
-										onChange={handleChange}
-									></textarea>
-									<p className="help-block text-danger"></p>
-								</div>
-								<div id="success"></div>
-								<button type="submit" className="btn btn-custom btn-lg">
-									Send Message
-								</button>
-							</form>
-						</div>
-					</div>
-					<div className="col-md-3 col-md-offset-1 contact-info">
-						<div className="contact-item">
-							<h3>Contact Info</h3>
-							<p>
-								<span>
-									<i className="fa fa-map-marker"></i> Address
-								</span>
-								{props.data ? props.data.address : 'loading'}
-							</p>
-						</div>
-						<div className="contact-item">
-							<p>
-								<span>
-									<i className="fa fa-phone"></i> Phone
-								</span>{' '}
-								{props.data ? props.data.phone : 'loading'}
-							</p>
-						</div>
-						<div className="contact-item">
-							<p>
-								<span>
-									<i className="fa fa-envelope-o"></i> Email
-								</span>{' '}
-								{props.data ? props.data.email : 'loading'}
-							</p>
-						</div>
-					</div>
-					<div className="col-md-12">
-						<div className="row">
-							<div className="social">
-								<ul>
-									<li>
-										<a href={props.data ? props.data.facebook : '/'}>
-											<i className="fa fa-facebook"></i>
-										</a>
-									</li>
-									<li>
-										<a href={props.data ? props.data.twitter : '/'}>
-											<i className="fa fa-twitter"></i>
-										</a>
-									</li>
-									<li>
-										<a href={props.data ? props.data.youtube : '/'}>
-											<i className="fa fa-youtube"></i>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+		<div className="container-xxl py-5">
+			<div className="container">
+				<div className="text-center wow fadeInUp" data-wow-delay="0.1s">
+					<h6 className="section-title bg-white text-center text-primary px-3">Contact Us</h6>
+					<h1 className="mb-5">Contact For Any Query</h1>
 				</div>
-			</div>
-			<div id="footer">
-				<div className="container text-center">
-					<p>
-						&copy; 2023 Issaaf Kattan React Land Page Template. Design by{' '}
-						<a href="http://www.templatewire.com" rel="nofollow">
-							TemplateWire
-						</a>
-					</p>
+				<div className="row g-4">
+					<div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+						<h5>Get In Touch</h5>
+						<p className="mb-4">
+							The contact form is currently inactive. Get a functional and working contact form with Ajax
+							& PHP in a few minutes. Just copy and paste the files, add a little code and you're done.{' '}
+							<a href="https://htmlcodex.com/contact-form">Download Now</a>.
+						</p>
+						<div className="d-flex align-items-center mb-3">
+							<div
+								className="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary"
+								style={{ width: '50px', height: '50px' }}
+							>
+								<i className="fa fa-map-marker-alt text-white" />
+							</div>
+							<div className="ms-3">
+								<h5 className="text-primary">Office</h5>
+								<p className="mb-0">123 Street, New York, USA</p>
+							</div>
+						</div>
+						<div className="d-flex align-items-center mb-3">
+							<div
+								className="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary"
+								style={{ width: '50px', height: '50px' }}
+							>
+								<i className="fa fa-phone-alt text-white" />
+							</div>
+							<div className="ms-3">
+								<h5 className="text-primary">Mobile</h5>
+								<p className="mb-0">+012 345 67890</p>
+							</div>
+						</div>
+						<div className="d-flex align-items-center">
+							<div
+								className="d-flex align-items-center justify-content-center flex-shrink-0 bg-primary"
+								style={{ width: '50px', height: '50px' }}
+							>
+								<i className="fa fa-envelope-open text-white" />
+							</div>
+							<div className="ms-3">
+								<h5 className="text-primary">Email</h5>
+								<p className="mb-0">info@example.com</p>
+							</div>
+						</div>
+					</div>
+					<div className="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+						<iframe
+							className="position-relative rounded w-100 h-100"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+							frameborder="0"
+							style={{ minHeight: '300px', border: '0' }}
+							allowfullscreen=""
+							aria-hidden="false"
+							tabindex="0"
+						/>
+					</div>
+					<div className="col-lg-4 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+						<form>
+							<div className="row g-3">
+								<div className="col-md-6">
+									<div className="form-floating">
+										<input type="text" className="form-control" id="name" placeholder="Your Name" />
+										<label for="name">Your Name</label>
+									</div>
+								</div>
+								<div className="col-md-6">
+									<div className="form-floating">
+										<input
+											type="email"
+											className="form-control"
+											id="email"
+											placeholder="Your Email"
+										/>
+										<label for="email">Your Email</label>
+									</div>
+								</div>
+								<div className="col-12">
+									<div className="form-floating">
+										<input
+											type="text"
+											className="form-control"
+											id="subject"
+											placeholder="Subject"
+										/>
+										<label for="subject">Subject</label>
+									</div>
+								</div>
+								<div className="col-12">
+									<div className="form-floating">
+										<textarea
+											className="form-control"
+											placeholder="Leave a message here"
+											id="message"
+											style={{ height: '150px' }}
+										/>
+										<label for="message">Message</label>
+									</div>
+								</div>
+								<div className="col-12">
+									<button className="btn btn-primary w-100 py-3" type="submit">
+										Send Message
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 };
+
+export default Contact;

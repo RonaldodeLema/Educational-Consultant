@@ -1,178 +1,275 @@
 {
 	"Header": {
-		"title": "Fiveace edu",
-		"paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sed commodo nibh ante facilisis bibendum."
+		"title": "5AceEdu",
+		"logo": "/icons/favicon-32x32.png",
+		"logo192": "/icons/logo192.png"
 	},
-	"About": {
-		"paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-		"Why": ["Lorem ipsum dolor", "Tempor incididunt", "Lorem ipsum dolor", "Incididunt ut labore"],
-		"Why2": ["Aliquip ex ea commodo", "Lorem ipsum dolor", "Exercitation ullamco", "Lorem ipsum dolor"]
-	},
-	"Gallery": [
+	"Carousel": [
 		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/01-large.jpg",
-			"smallImage": "img/portfolio/01-small.jpg"
+			"thumbnail_img": "/img/carousel-1.jpg",
+			"title": "Những khóa học trực tuyến tốt nhất",
+			"sub_title": "Nền tảng học trực tuyến tốt nhất",
+			"describe_text": "Nền tảng của chúng tôi thể hỗ trợ người dạy và người học trong quá trình giảng dạy và học tập trực tuyến. Với các tính năng như: chia sẻ màn hình, ghi âm, chat, bảng trắng, bình luận, đánh giá, cấp chứng chỉ,… Cùng với giao diện thân thiện, dễ sử dụng và tính bảo mật cao.",
+			"path_1": "about",
+			"path_2": "courses"
 		},
 		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/02-large.jpg",
-			"smallImage": "img/portfolio/02-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/03-large.jpg",
-			"smallImage": "img/portfolio/03-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/04-large.jpg",
-			"smallImage": "img/portfolio/04-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/05-large.jpg",
-			"smallImage": "img/portfolio/05-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/06-large.jpg",
-			"smallImage": "img/portfolio/06-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/07-large.jpg",
-			"smallImage": "img/portfolio/07-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/08-large.jpg",
-			"smallImage": "img/portfolio/08-small.jpg"
-		},
-		{
-			"title": "Project Title",
-			"largeImage": "img/portfolio/09-large.jpg",
-			"smallImage": "img/portfolio/09-small.jpg"
+			"thumbnail_img": "/img/carousel-2.jpg",
+			"title": "Những khóa học trực tuyến tốt nhất",
+			"sub_title": "Học ở bất cứ đâu",
+			"describe_text": "Đến với chúng tôi bạn có thể học ở bất cứ đâu bạn muốn (miễn là có kết nối mạng). Điều này có nhiều ưu điểm như tiết kiệm thời gian, chi phí, linh hoạt thời gian, học theo nhu cầu và sở thích, truy cập được nhiều nguồn kiến thức khác nhau, tương tác với nhiều người học khác trên thế giới, v.v…",
+			"path_1": "about",
+			"path_2": "courses"
 		}
 	],
 	"Services": [
 		{
-			"icon": "fa fa-wordpress",
-			"name": "Lorem ipsum dolor",
-			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+			"dataWowDelay": "0.1s",
+			"serviceIcon": "fa-graduation-cap",
+			"serviceTitle": "Giảng viên giàu kinh nghiệm",
+			"serviceSubTitle": "Bạn có muốn học cùng những giáo viên tài năng và nhiệt tình? Hãy gặp gỡ các giáo viên của chúng tôi tại phần Giảng viên giàu kinh nghiệm."
 		},
 		{
-			"icon": "fa fa-cart-arrow-down",
-			"name": "Consectetur adipiscing",
-			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+			"dataWowDelay": "0.3s",
+			"serviceIcon": "fa-globe",
+			"serviceTitle": "Các lớp học trực tuyến",
+			"serviceSubTitle": "Bạn có muốn học một khóa học trực tuyến về một chủ đề nào đó mà bạn quan tâm? Hãy đăng ký các lớp học trực tuyến của chúng tôi để được học cùng các giáo viên và học viên khác từ khắp nơi trên thế giới."
 		},
 		{
-			"icon": "fa fa-cloud-download",
-			"name": "Lorem ipsum dolor",
-			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+			"dataWowDelay": "0.5s",
+			"serviceIcon": "fa-home",
+			"serviceTitle": "Các dự án tại nhà",
+			"serviceSubTitle": "Bạn có muốn thực hiện các dự án tại nhà cho bản thân hoặc con cái của bạn? Hãy khám phá các ý tưởng thú vị và hữu ích từ phần Home Projects của chúng tôi."
 		},
 		{
-			"icon": "fa fa-language",
-			"name": "Consectetur adipiscing",
-			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
-		},
-		{
-			"icon": "fa fa-plane",
-			"name": "Lorem ipsum dolor",
-			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
-		},
-		{
-			"icon": "fa fa-pie-chart",
-			"name": "Consectetur adipiscing",
-			"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+			"dataWowDelay": "0.7s",
+			"serviceIcon": "fa-book-open",
+			"serviceTitle": "Thư viện",
+			"serviceSubTitle": "Bạn có yêu sách và muốn đọc nhiều hơn? Hãy ghé thăm phần thư của chúng tôi để khám phá hàng ngàn quyển sách hấp dẫn và bổ ích."
 		}
 	],
-	"Testimonials": [
-		{
-			"img": "img/testimonials/01.jpg",
-			"text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-			"name": "John Doe"
+	"About": {
+		"LeftSide": {
+			"thumbnail_img": "/img/about.jpg"
 		},
-		{
-			"img": "img/testimonials/02.jpg",
-			"text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-			"name": "Johnathan Doe"
-		},
-		{
-			"img": "img/testimonials/03.jpg",
-			"text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-			"name": "John Doe"
-		},
-		{
-			"img": "img/testimonials/04.jpg",
-			"text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-			"name": "Johnathan Doe"
-		},
-		{
-			"img": "img/testimonials/05.jpg",
-			"text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-			"name": "John Doe"
-		},
-		{
-			"img": "img/testimonials/06.jpg",
-			"text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-			"name": "Johnathan Doe"
+		"RightSide": {
+			"title": "Chào mừng đến với 5AceEdu",
+			"para1": "Chúng tôi là một nhóm những người yêu giáo dục, tin rằng học tập là một hành trình suốt đời. Chúng tôi cung cấp các khóa học trực tuyến, hội thảo và dịch vụ hướng dẫn để giúp bạn đạt được mục tiêu cá nhân và nghề nghiệp của mình. Dù bạn muốn học một kỹ năng mới, nâng cao cơ hội nghề nghiệp, hay chỉ đơn giản là thỏa mãn sự tò mò của mình, chúng tôi đều có điều gì đó dành cho bạn!",
+			"para2": "Các khóa học của chúng tôi được thiết kế bởi các chuyên gia trong lĩnh vực của họ, và bao gồm nhiều chủ đề khác nhau, từ ngôn ngữ và nghệ thuật, đến khoa học và công nghệ. Bạn có thể học tập theo tốc độ của mình, bất cứ lúc nào và ở bất cứ đâu, với nền tảng linh hoạt và tương tác của chúng tôi. Hãy tham gia cùng chúng tôi ngay hôm nay và khám phá niềm vui của việc học tập.",
+			"features": [
+				{
+					"name": "Giảng viên giàu kinh nghiệm"
+				},
+				{
+					"name": "Các lớp học trực tuyến"
+				},
+				{
+					"name": "Chứng chỉ quốc tế"
+				},
+				{
+					"name": "Nhắn tin trực tuyến với AI"
+				},
+				{
+					"name": "Nội dung bài giảng dễ hiểu"
+				},
+				{
+					"name": "Đa dạng các ngành nghề"
+				}
+			]
 		}
-	],
-	"Team": [
-		{
-			"img": "img/team/01.jpg",
-			"name": "John Doe",
-			"job": "Director"
-		},
-		{
-			"img": "img/team/02.jpg",
-			"name": "Mike Doe",
-			"job": "Senior Designer"
-		},
-		{
-			"img": "img/team/03.jpg",
-			"name": "Jane Doe",
-			"job": "Senior Designer"
-		},
-		{
-			"img": "img/team/04.jpg",
-			"name": "Karen Doe",
-			"job": "Project Manager"
-		}
-	],
-	"Contact": {
-		"address": "4321 California St, San Francisco, CA 12345 ",
-		"phone": "+1 123 456 1234",
-		"email": "info@company.com",
-		"facebook": "fb.com",
-		"twitter": "twitter.com",
-		"youtube": "youtube.com"
 	},
-	"Features": [
-		{
-			"icon": "fa fa-comments-o",
-			"title": "Chat with AI",
-			"text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.",
-			"path": "/chat"
+	"Categories": {
+		"Header": {
+			"dataWowDelay": "0.1s",
+			"title": "Danh mục",
+			"paragraph": "Danh mục các khóa học"
 		},
-		{
-			"icon": "fa fa-bullhorn",
-			"title": "Lorem ipsum",
-			"text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.",
-			"path": "/"
-		},
-		{
-			"icon": "fa fa-group",
-			"title": "Lorem ipsum",
-			"text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.",
-			"path": "/"
-		},
-		{
-			"icon": "fa fa-magic",
-			"title": "Lorem ipsum",
-			"text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam.",
-			"path": "/"
+		"LeftSide": [
+			{
+				"pos": "col-lg-12",
+				"dataWowDelay": "0.1s",
+				"categoryThumbnail": "img/cat-1.jpg",
+				"categoryTitle": "Thiết kế web (Web Design)",
+				"categoryCourseQuantity": 49
+			},
+			{
+				"pos": "col-lg-6",
+				"dataWowDelay": "0.3s",
+				"categoryThumbnail": "img/cat-2.jpg",
+				"categoryTitle": "Thiết kế đồ họa (Graphic Design)",
+				"categoryCourseQuantity": 49
+			},
+			{
+				"pos": "col-lg-6",
+				"dataWowDelay": "0.5s",
+				"categoryThumbnail": "img/cat-3.jpg",
+				"categoryTitle": "Chỉnh sửa video (Video Editing)",
+				"categoryCourseQuantity": 49
+			}
+		],
+		"RightSide": {
+			"pos": "col-lg-5 ",
+			"dataWowDelay": "0.7s",
+			"categoryThumbnail": "img/cat-4.jpg",
+			"categoryTitle": "Tiếp thị trực tuyến (Online marketing)",
+			"categoryCourseQuantity": 49
 		}
-	]
+	},
+	"Courses": {
+		"Header": {
+			"dataWowDelay": "0.1s",
+			"title": "Các khóa học",
+			"paragraph": "Các khóa học phổ biến"
+		},
+		"CourseItems": [
+			{
+				"dataWowDelay": "0.1s",
+				"coursePrice": "3.671.360đ",
+				"courseMentor": "Chí Vinh",
+				"courseTitle": "Khóa học thiết kế và phát triển website với PHP cho người mới",
+				"courseQuantity": "30",
+				"courseHour": "9",
+				"courseThumbnail": "img/course-1.jpg"
+			},
+			{
+				"dataWowDelay": "0.3s",
+				"coursePrice": "3.671.360đ",
+				"courseMentor": "Văn Thảo",
+				"courseTitle": "Khóa học thiết kế và phát triển website với C# cho người mới",
+				"courseQuantity": "30",
+				"courseHour": "13",
+				"courseThumbnail": "img/course-2.jpg"
+			},
+			{
+				"dataWowDelay": "0.5s",
+				"coursePrice": "3.671.360đ",
+				"courseMentor": "Tài Tường",
+				"courseTitle": "Khóa học thiết kế và phát triển website với Java cho người mới",
+				"courseQuantity": "30",
+				"courseHour": "13",
+				"courseThumbnail": "img/course-3.jpg"
+			}
+		]
+	},
+	"Team": {
+		"Header": {
+			"dataWowDelay": "0.1s",
+			"title": "Đội ngũ giảng viên",
+			"paragraph": "Những giảng viên giàu kinh nghiệm"
+		},
+		"TeamItems": [
+			{
+				"dataWowDelay": "0.1s",
+				"instructorName": "Trần Văn Thảo",
+				"instructorImage": "/img/team-1.jpg",
+				"job": "Lập trình viên Front End"
+			},
+			{
+				"dataWowDelay": "0.3s",
+				"instructorName": "Lê Thị Hoa",
+				"instructorImage": "/img/team-2.jpg",
+				"job": "Lập trình viên Back End"
+			},
+			{
+				"dataWowDelay": "0.5s",
+				"instructorName": "Lê Chí Vinh",
+				"instructorImage": "/img/team-3.jpg",
+				"job": "Designer chuyên nghiệp"
+			},
+			{
+				"dataWowDelay": "0.7s",
+				"instructorName": "Võ Ngọc Hoa",
+				"instructorImage": "/img/team-4.jpg",
+				"job": "Designer chuyên nghiệp"
+			}
+		]
+	},
+	"Testimonial": {
+		"dataWowDelay": "0.1s",
+		"Header": {
+			"title": "Nhận xét",
+			"paragraph": "Những học viên của chúng tôi nói gì ?"
+		},
+		"Body": [
+			{
+				"userImage": "/img/testimonial-1.jpg",
+				"userFullName": "Đỗ Rê Mi",
+				"userLevel": "New",
+				"userComment": "Khóa học rất hay, tôi học được rất nhiều ở đây"
+			},
+			{
+				"userImage": "/img/testimonial-2.jpg",
+				"userFullName": "Đỗ Rê Mon",
+				"userLevel": "Profession",
+				"userComment": "Tôi đã học ở đây rất nhiều lần khóa học rất thú vị"
+			},
+			{
+				"userImage": "/img/testimonial-3.jpg",
+				"userFullName": "Nô Bi Ta",
+				"userLevel": "Profession",
+				"userComment": "Từ một học sinh kém tôi đã đạt hạng 1 nhờ học ở đây"
+			},
+			{
+				"userImage": "/img/testimonial-4.jpg",
+				"userFullName": "Đê khi",
+				"userLevel": "Profession",
+				"userComment": "Tôi đã tham khảo xem anh Ta đã học ở đâu mà tiến bộ nhanh để tham gia. Thật sự các khóa học rất bổ ích"
+			}
+		]
+	},
+	"Footer": {
+		"dataWowDelay": "0.1s",
+		"FirstContainer": {
+			"QuickLinks": {
+				"title": "",
+				"links": [
+					{
+						"text": "Về chúng tôi",
+						"path": "/about"
+					},
+					{
+						"text": "Liên hệ với chúng tôi",
+						"path": "/contact"
+					},
+					{
+						"text": "Chính sách quyền riêng tư",
+						"path": "/"
+					},
+					{
+						"text": "Điều khoản và điều kiện",
+						"path": "/"
+					},
+					{
+						"text": "FAQs & Help",
+						"path": "/"
+					}
+				]
+			},
+			"Contact": {
+				"title": "Liên hệ",
+				"address": "19 Nguyễn Hữu Thọ, quận 7, Thành phố Hồ Chí minh",
+				"phone": "+012 345 67890",
+				"email": "conghuy.nv@gmail.com"
+			},
+			"Gallery": {
+				"title": "Các khóa học",
+				"imgs": [
+					"/img/course-1.jpg",
+					"/img/course-2.jpg",
+					"/img/course-3.jpg",
+					"/img/course-1.jpg",
+					"/img/course-2.jpg",
+					"/img/course-3.jpg"
+				]
+			},
+			"Newsletter": {
+				"title": "Newsletter",
+				"sub_title": "Dolor amet sit justo amet elitr clita ipsum elitr est."
+			}
+		},
+		"SecondContainer": {
+			"dns": "fiveace",
+			"menus": ["Home", "Cookies", "Help", "FQAs"]
+		}
+	}
 }

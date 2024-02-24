@@ -11,9 +11,10 @@ const Chat = ({ landingPageData, apiKey }) => {
 			text: `Chào bạn, mình là <b><i>FIVEACE EDU</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
 		},
 	]);
+
 	const msgerRef = useRef(null);
 	const navRef = useRef(null);
-	const { logout } = useAuth();
+	const { logout, user } = useAuth();
 
 	const handleLogout = () => {
 		logout();
@@ -28,10 +29,9 @@ const Chat = ({ landingPageData, apiKey }) => {
 	return (
 		<div className="chat-page container-fluid p-0 m-0">
 			<Navigation data={landingPageData.Header} ref={navRef} />
-
-			<button onClick={handleLogout}>Logout</button>
+			{user && <button onClick={handleLogout}>Logout</button>}
 			<section className="msger" ref={msgerRef}>
-				<ChatBody messages={messages} setMessages={setMessages} apiKey={apiKey} />
+				<ChatBody messages={messages} setMessages={setMessages} apiKey={apiKey} user={user} />
 			</section>
 		</div>
 	);
