@@ -5,10 +5,10 @@ import Back2TopBtn from './HomeComponents/Back2TopBtn';
 import Header from './Partials/Header';
 
 import useWOW from '../hooks/useWOW';
-
+import useAutoTopPage from '../hooks/useAutoTopPage';
 const TeamPage = ({ fixedData }) => {
 	useWOW();
-
+	useAutoTopPage();
 	return (
 		<>
 			<Navigation data={fixedData.Header} />

@@ -10,10 +10,11 @@ import Footer from './HomeComponents/Footer';
 import Back2TopBtn from './HomeComponents/Back2TopBtn';
 
 import useWOW from '../hooks/useWOW';
+import useAutoTopPage from '../hooks/useAutoTopPage';
 
 const HomePage = ({ fixedData }) => {
 	useWOW();
-	
+	useAutoTopPage();
 	return (
 		<>
 			<Navigation data={fixedData.Header} />
