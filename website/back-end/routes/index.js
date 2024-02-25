@@ -9,6 +9,20 @@ const router = Router();
 const instance = axios.create({ baseURL: 'http://127.0.0.1:5000/api' });
 const saltRounds = 10;
 
+router.post('/get_api_key', async (req, res, next) => {
+  const { username, password } = req.body;
+  if (username === process.env.AI_BOT_USERNAME
+    && password === process.env.AI_BOT_PASSWORD) {
+    const response = await instance.post(process.env.GET_API_KEY_RP, {
+      username, password
+    });
+    res.cookie('apiKey', response.data.api_key);
+    return res.status(200).json({ ok: true });
+  }
+  return res.status(404).json('Unauthorization');
+});
+
+
 router.get('/logout', async (req, res, next) => {
   delete req.session.currUser;
   return res.status(200).json({ ok: true });
@@ -39,9 +53,9 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.post('/chat', async (req, res, next) => {
-  const { _id, msgTextInput, apiKey } = req.body;
+  const { _id, msgTextInput } = req.body;
   if (_id) await MessageBase.create({ msgContent: msgTextInput, sender: _id, sendAt: Date.now() });
-  instance.defaults.headers.common.Authorization = apiKey;
+  instance.defaults.headers.common.Authorization = req.cookies.apiKey;
   await instance.post(process.env.GET_QA_RP, {
     "question": msgTextInput
   })
@@ -62,19 +76,6 @@ router.post('/chat', async (req, res, next) => {
       console.error(QA_obj_errer.statusCode);
       console.error(QA_obj_errer.statusMessage);
     });;
-});
-
-router.post('/get_api_key', async (req, res, next) => {
-  const { username, password } = req.body;
-  if (username === 'tdtu' && password === '123456') {
-    const response = await instance.post(process.env.GET_API_KEY_RP, {
-      username, password
-    });
-
-    return res.status(200).json({ ok: true, apiKey: response.data.api_key });
-  }
-
-  return res.status(404).json('Unauthorization');
 });
 
 

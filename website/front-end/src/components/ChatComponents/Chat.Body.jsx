@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './../../hooks/useAuth';
 import Form from './Chat.Form';
 
-const Body = ({ messages, setMessages, apiKey }) => {
+const Body = ({ messages, setMessages }) => {
 	const { user } = useAuth();
 
 	const chatLimitation = user ? 20 : 10;
@@ -46,7 +46,7 @@ const Body = ({ messages, setMessages, apiKey }) => {
 							</div>
 						))}
 					</main>
-					<Form setMessages={setMessages} apiKey={apiKey} chatLimitation={chatLimitation} user={user} />
+					<Form setMessages={setMessages} chatLimitation={chatLimitation} user={user} />
 				</section>
 			</div>
 			<div className="col" />
