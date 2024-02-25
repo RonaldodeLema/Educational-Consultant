@@ -1,11 +1,11 @@
 import Navigation from '../HomeComponents/Navigation';
 import Body from './Chat.Body';
 
-const ChatPage = ({ fixedData, apiKey }) => {
+const ChatPage = ({ messages, setMessages, fixedData, apiKey }) => {
 	return (
 		<>
 			<Navigation data={fixedData.Header} />
-			<Body apiKey={apiKey} />
+			<Body messages={messages} setMessages={setMessages} apiKey={apiKey} />
 		</>
 	);
 };

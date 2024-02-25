@@ -27,6 +27,13 @@ const App = () => {
 	const [errorCode, setErrorCode] = useState(404);
 	const [errorStack, setErrorStack] = useState('Oops! Đã có lỗi xảy ra');
 
+	const [messages, setMessages] = useState([
+		{
+			side: `left`,
+			text: `Chào bạn, mình là <b><i>5AceEdu</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
+		},
+	]);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const startTime = performance.now();
@@ -65,7 +72,7 @@ const App = () => {
 				<Route path="/pages">
 					<Route path="our-team" element={<TeamPage fixedData={fixedData} />} />
 					<Route path="testimonial" element={<TestimonialPage fixedData={fixedData} />} />
-					<Route path="chat-with-ai" element={<ChatPage fixedData={fixedData} apiKey={apiKey} />} />
+					<Route path="chat-with-ai" element={<ChatPage messages={messages} setMessages={setMessages} fixedData={fixedData} apiKey={apiKey} />} />
 				</Route>
 				<Route path="/signin" element={<SignIn fixedData={fixedData} />} />
 				<Route path="/signup" element={<SignUp fixedData={fixedData} />} />

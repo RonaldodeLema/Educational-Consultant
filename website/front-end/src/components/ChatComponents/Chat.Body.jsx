@@ -2,14 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from './../../hooks/useAuth';
 import Form from './Chat.Form';
 
-const Body = ({ apiKey }) => {
-	const [messages, setMessages] = useState([
-		{
-			side: `left`,
-			text: `Chào bạn, mình là <b><i>5AceEdu</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
-		},
-	]);
-
+const Body = ({ messages, setMessages, apiKey }) => {
 	const { user } = useAuth();
 
 	const chatLimitation = user ? 20 : 10;
