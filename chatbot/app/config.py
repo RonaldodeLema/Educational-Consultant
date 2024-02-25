@@ -3,9 +3,9 @@ from pymongo import MongoClient
 
 class Config:
     DEBUG = False
-    RETRIEVER_PATH = '/app/models/default/default_retriever.pkl'
-    MODEL_PATH = '/app/models/'
-    READER_PATH = '/app/models/default/defau;t_reader_model.pth'
+    RETRIEVER_PATH = './app/models/default/default_retriever.pkl'
+    MODEL_PATH = './app/models/'
+    READER_PATH = './app/models/default/defaut_reader_model.pth'
     VOCAB_SIZE = 64001
     EMBEDDING_DIM = 256
     HIDDEN_SIZE = 128
