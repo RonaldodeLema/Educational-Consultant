@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuth } from './../../hooks/useAuth';
 
 import MobileBtn from './Navigation.Mobile.Collapse.Btn';
 
@@ -7,6 +8,7 @@ const Navigation = ({ data }) => {
 	const [navbarTop, setNavbarTop] = useState('-100px');
 	const location = useLocation();
 	const [activeItem, setActiveItem] = useState(location.pathname);
+	const { user, logout } = useAuth();
 
 	useEffect(() => {
 		setActiveItem(location.pathname);
@@ -44,7 +46,10 @@ const Navigation = ({ data }) => {
 			</Link>
 			<MobileBtn />
 			<div className="collapse navbar-collapse" id="navbarCollapse">
-				<div className="navbar-nav ms-auto p-4 p-lg-0">
+				<div
+					className="navbar-nav ms-auto p-4 p-lg-0"
+					{...(user === null ? {} : { style: { alignItems: 'center' } })}
+				>
 					<Link to={'/'} className={`nav-item nav-link ${activeItem === '/' ? 'active' : ''}`}>
 						Trang chủ
 					</Link>
@@ -90,11 +95,31 @@ const Navigation = ({ data }) => {
 					<Link to={'/contact'} className={`nav-item nav-link ${activeItem === '/contact' ? 'active' : ''}`}>
 						Liên hệ
 					</Link>
+					{user !== null && (
+						<div className="nav-item dropdown" style={{ marginRight: '50px' }}>
+							<a
+								className={`nav-link text-primary`}
+								data-bs-toggle="dropdown"
+								style={{ textTransform: 'none' }}
+							>
+								<i style={{border: `1px solid`, borderRadius: '30px', padding: '5px 10px'}}>
+									Chào, <b>{user.username}</b>
+								</i>
+							</a>
+							<div className="dropdown-menu fade-down m-0 dropdown-menu-start">
+								<Link onClick={logout} className={`dropdown-item`}>
+									Đăng xuất
+								</Link>
+							</div>
+						</div>
+					)}
 				</div>
-				<Link to={'/signin'} className="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-					Đăng nhập
-					<i className="fa fa-arrow-right ms-3" />
-				</Link>
+				{user === null && (
+					<Link to={'/signin'} className="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+						Đăng nhập
+						<i className="fa fa-arrow-right ms-3" />
+					</Link>
+				)}
 			</div>
 		</nav>
 	);

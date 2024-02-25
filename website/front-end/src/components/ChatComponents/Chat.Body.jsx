@@ -10,19 +10,16 @@ const Body = ({ apiKey }) => {
 		},
 	]);
 
-	const { logout, user } = useAuth();
-
-	const handleLogout = () => {
-		logout();
-	};
+	const { user } = useAuth();
 
 	const chatLimitation = user ? 20 : 10;
 	const refreshPage = () => window.location.reload(false);
 
 	return (
 		<div className="chat-page container-fluid p-0 m-0 d-flex justify-content-center mt-2 mh-100">
-			<div className="col-lg-3">{user && <button onClick={handleLogout}>Logout</button>}</div>
-			<div className="col-lg-6">
+			{/* <div className="col-lg-3">{user && <button onClick={handleLogout}>Logout</button>}</div> */}
+			<div className="col" />
+			<div className="col-8 d-flex justify-content-center">
 				<section className="msger">
 					<main className="msger-chat">
 						{messages?.map((message, index) => (
@@ -59,7 +56,7 @@ const Body = ({ apiKey }) => {
 					<Form setMessages={setMessages} apiKey={apiKey} chatLimitation={chatLimitation} user={user} />
 				</section>
 			</div>
-			<div className="col-lg-3" />
+			<div className="col" />
 		</div>
 	);
 };

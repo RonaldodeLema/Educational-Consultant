@@ -113,7 +113,7 @@
 }
 
 .navbar-light .navbar-brand,
-.navbar-light a.btn {
+.navbar-light :is(a.btn,p) {
 	height: 75px;
 }
 
@@ -671,9 +671,9 @@ html {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 	position: relative;
 	overflow: hidden;
-	width: calc(8*120px);
+	width: calc(8 * 120px);
 	max-width: 100%;
-	min-height: calc(5*120px) ;
+	min-height: calc(5 * 120px);
 }
 
 .signin-page .form-container {
