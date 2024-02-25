@@ -70,7 +70,7 @@ const Contact = () => {
 								<div className="col-md-6">
 									<div className="form-floating">
 										<input type="text" className="form-control" id="name" placeholder="Your Name" />
-										<label for="name">Your Name</label>
+										<label htmlFor="name">Your Name</label>
 									</div>
 								</div>
 								<div className="col-md-6">
@@ -81,7 +81,7 @@ const Contact = () => {
 											id="email"
 											placeholder="Your Email"
 										/>
-										<label for="email">Your Email</label>
+										<label htmlFor="email">Your Email</label>
 									</div>
 								</div>
 								<div className="col-12">
@@ -92,7 +92,7 @@ const Contact = () => {
 											id="subject"
 											placeholder="Subject"
 										/>
-										<label for="subject">Subject</label>
+										<label htmlFor="subject">Subject</label>
 									</div>
 								</div>
 								<div className="col-12">
@@ -103,7 +103,7 @@ const Contact = () => {
 											id="message"
 											style={{ height: '150px' }}
 										/>
-										<label for="message">Message</label>
+										<label htmlFor="message">Message</label>
 									</div>
 								</div>
 								<div className="col-12">

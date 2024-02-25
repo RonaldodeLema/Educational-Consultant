@@ -22,20 +22,14 @@ export const SignIn = ({ fixedData }) => {
 		if (username.trim() === '' || password.trim() === '')
 			return setError('Tài khoản hoặc mật khẩu không được để trống!');
 		const signInObj = { username: username.trim(), password: password.trim() };
-		// const match = testDatas.some((user) => user.username === username.trim());
-		// if (!match) return setError('Tài khoản hoặc mật khẩu không đúng!');
 		await makeAxiosReq
 			.post('/login', signInObj)
 			.then(async (res) => res.data.ok && login(res.data.user))
 			.catch((err) => {
-				// if (err.response && err.response.status === 404) {
-				// 	err.code && setErrorCode(err.response.status);
-				// 	err.name && setErrorStack(err.response.statusText);
-				// 	err.message && setErrorMessage(err.response.data.message);
-				// } else {
-				// 	console.error(err);
-				// }
-				navigate('/error');
+				if (err.response && err.response.status === 404) {
+					return setError(err.response.data.message);
+				}
+				// navigate('/error');
 			});
 	};
 
@@ -46,8 +40,8 @@ export const SignIn = ({ fixedData }) => {
 				<div className="container" id="container">
 					<div className="form-container log-in-container">
 						<form onSubmit={handleSubmit}>
-							<h1>Đăng nhập</h1>
-							<SocialContainer />
+							<h1 style={{marginBottom: '4rem'}}>Đăng nhập</h1>
+							{/* <SocialContainer /> */}
 							<SignInBodyForm setUsername={setUsername} setPassword={setPassword} error={error} />
 						</form>
 					</div>

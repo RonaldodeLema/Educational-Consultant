@@ -16,7 +16,7 @@ const Body = ({ apiKey }) => {
 		logout();
 	};
 
-	const chatLimitation = user ? 20 : 1;
+	const chatLimitation = user ? 20 : 10;
 	const refreshPage = () => window.location.reload(false);
 
 	return (
@@ -59,7 +59,7 @@ const Body = ({ apiKey }) => {
 					<Form setMessages={setMessages} apiKey={apiKey} chatLimitation={chatLimitation} user={user} />
 				</section>
 			</div>
-			<div className="col-lg-3"></div>
+			<div className="col-lg-3" />
 		</div>
 	);
 };
