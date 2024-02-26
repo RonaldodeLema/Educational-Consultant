@@ -5,10 +5,10 @@ This project is a chatbot application developed using Flask. It allows users to 
 
 ## Installation
 1. Clone the repository: `git clone https://github.com/RonaldodeLema/dacntt2-fiveace.git`
-2. Navigate to the project directory: `cd <project-directory>`
+2. Navigate to the project directory: `cd <dacntt2-fiveace/chatbot>`
 3. Create a virtual environment: `python3 -m venv venv`
 4. Activate the virtual environment:
-    - For Windows: `venv\Scripts\activate`
+    - For Windows: `venv\Scripts\activate
     - For macOS/Linux: `source venv/bin/activate`
 5. Install the dependencies: `pip install -r requirements.txt`
 
