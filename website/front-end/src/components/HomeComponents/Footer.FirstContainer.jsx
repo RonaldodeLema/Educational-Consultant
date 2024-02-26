@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Scroll2EleWithId from './../Scroll2EleWithId';
 
 const FirstContainer = ({ data }) => {
@@ -8,9 +9,9 @@ const FirstContainer = ({ data }) => {
 					<div className="col-lg-4 col-md-6">
 						<h4 className="text-white mb-3">{data.QuickLinks.title}</h4>
 						{data.QuickLinks.links.map((l, i) => (
-							<a className="btn btn-link" href={l.path} key={i}>
+							<Link className="btn btn-link" to={l.path} key={i}>
 								{l.text}
-							</a>
+							</Link>
 						))}
 					</div>
 				) : (

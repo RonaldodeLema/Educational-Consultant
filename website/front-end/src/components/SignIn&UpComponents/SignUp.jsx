@@ -17,25 +17,21 @@ export const SignUp = ({ fixedData }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
 		if (username.trim() === '' || password.trim() === '' || repassword.trim() === '') {
-			setError('Vui lòng điền tất cả các ô!');
-			return;
+			return setError('Vui lòng điền tất cả các ô!');
 		}
-
 		if (password.trim() !== repassword.trim()) {
 			setPassword('');
 			setRepassword('');
-			setError('Xác nhận mật khẩu và mật khẩu không khớp!');
-			return;
+			return setError('Xác nhận mật khẩu và mật khẩu không khớp!');
 		}
-		// add the other logics & your sign up logic here.
-
 		const signUpObj = { username: username.trim(), password: password.trim() };
 		await makeAxiosReq
-			.post('/users', signUpObj)
-			.then((res) => res.status === 201 && navigate('/signin'))
-			.catch((err) => console.error(err));
+			.post('/register', signUpObj)
+			.then((res) => res.data.ok && navigate('/signin'))
+			.catch((err) => {
+				return setError(err.response.data.message);
+			});
 	};
 
 	return (

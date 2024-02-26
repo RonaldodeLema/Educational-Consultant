@@ -22,10 +22,16 @@ import './index.css';
 const App = () => {
 	const [fixedData, setFixedData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [apiKey, setApiKey] = useState('');
 	const [errorMessage, setErrorMessage] = useState('Không tìm thấy');
 	const [errorCode, setErrorCode] = useState(404);
 	const [errorStack, setErrorStack] = useState('Oops! Đã có lỗi xảy ra');
+
+	const [messages, setMessages] = useState([
+		{
+			side: `left`,
+			text: `Chào bạn, mình là <b><i>5AceEdu</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
+		},
+	]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -36,8 +42,7 @@ const App = () => {
 				console.error(`Error: ${error}`);
 			}
 			makeAxiosReq
-				.post('/get_api_key', { username: 'tdtu', password: '123456' })
-				.then((response) => response.data.ok && setApiKey(response.data.apiKey))
+				.post('/get_api_key', { username: 'tdtu', password: '123456', credentials: 'includes' })
 				.catch((err) => console.error(err));
 			const endTime = performance.now();
 			const executionTime = endTime - startTime;
@@ -47,7 +52,6 @@ const App = () => {
 				}, 1500 - executionTime);
 			}
 		};
-
 		fetchData();
 	}, []);
 
@@ -65,7 +69,10 @@ const App = () => {
 				<Route path="/pages">
 					<Route path="our-team" element={<TeamPage fixedData={fixedData} />} />
 					<Route path="testimonial" element={<TestimonialPage fixedData={fixedData} />} />
-					<Route path="chat-with-ai" element={<ChatPage fixedData={fixedData} apiKey={apiKey} />} />
+					<Route
+						path="chat-with-ai"
+						element={<ChatPage messages={messages} setMessages={setMessages} fixedData={fixedData} />}
+					/>
 				</Route>
 				<Route path="/signin" element={<SignIn fixedData={fixedData} />} />
 				<Route path="/signup" element={<SignUp fixedData={fixedData} />} />

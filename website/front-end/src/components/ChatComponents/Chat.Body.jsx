@@ -2,27 +2,17 @@ import React, { useState } from 'react';
 import { useAuth } from './../../hooks/useAuth';
 import Form from './Chat.Form';
 
-const Body = ({ apiKey }) => {
-	const [messages, setMessages] = useState([
-		{
-			side: `left`,
-			text: `Chào bạn, mình là <b><i>5AceEdu</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
-		},
-	]);
+const Body = ({ messages, setMessages }) => {
+	const { user } = useAuth();
 
-	const { logout, user } = useAuth();
-
-	const handleLogout = () => {
-		logout();
-	};
-
-	const chatLimitation = user ? 20 : 1;
+	const chatLimitation = user ? 20 : 10;
 	const refreshPage = () => window.location.reload(false);
 
 	return (
 		<div className="chat-page container-fluid p-0 m-0 d-flex justify-content-center mt-2 mh-100">
-			<div className="col-lg-3">{user && <button onClick={handleLogout}>Logout</button>}</div>
-			<div className="col-lg-6">
+			{/* <div className="col-lg-3">{user && <button onClick={handleLogout}>Logout</button>}</div> */}
+			<div className="col" />
+			<div className="col-8 d-flex justify-content-center">
 				<section className="msger">
 					<main className="msger-chat">
 						{messages?.map((message, index) => (
@@ -56,10 +46,10 @@ const Body = ({ apiKey }) => {
 							</div>
 						))}
 					</main>
-					<Form setMessages={setMessages} apiKey={apiKey} chatLimitation={chatLimitation} user={user} />
+					<Form setMessages={setMessages} chatLimitation={chatLimitation} user={user} />
 				</section>
 			</div>
-			<div className="col-lg-3"></div>
+			<div className="col" />
 		</div>
 	);
 };

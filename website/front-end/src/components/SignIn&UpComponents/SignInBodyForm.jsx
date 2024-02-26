@@ -18,16 +18,22 @@ export const SignInBodyForm = ({ setUsername, setPassword, error }) => {
 				className="password"
 				placeholder="Mật khẩu"
 				onChange={(e) => setPassword(e.target.value)}
+				autoComplete="off"
 			/>
 			{error && (
-				<p className="text-danger mb-3" style={{ alignSelf: 'flex-start', fontSize: '11px' }}>
+				<p
+					className="text-danger"
+					style={{ alignSelf: 'flex-start', textAlign: 'start', fontSize: '14px', marginBottom: '2rem' }}
+				>
 					<i>{error}</i>
 				</p>
 			)}
 			{/* <Link to="/">
 				<span>Quên mật khẩu?</span>
 			</Link> */}
-			<button className={`submitBtn ${error ? '' : 'mt-3'}`}>Đăng nhập</button>
+			<button className={`submitBtn`} {...(error ? {} : { style: { marginTop: '2rem' } })}>
+				Đăng nhập
+			</button>
 		</>
 	);
 };

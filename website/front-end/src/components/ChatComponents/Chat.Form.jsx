@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import makeAxiosReq from '../../apis/makeAxiosReq';
 
-const Form = ({ setMessages, apiKey, chatLimitation, user }) => {
+const Form = ({ setMessages, chatLimitation, user }) => {
 	const maxDigit = 200;
 	const [msgText, setMsgText] = useState('');
 	const [chatAble, setChatAble] = useState(1);
@@ -19,10 +19,7 @@ const Form = ({ setMessages, apiKey, chatLimitation, user }) => {
 	const botResponse = async (msgTextInput) => {
 		setDisabledBtn(true);
 		appendMessage('loading left', 'Đợi mình suy nghĩ chút nhé!');
-		const postReq =
-			user !== null && typeof user === 'object'
-				? { _id: user._id, msgTextInput, apiKey }
-				: { msgTextInput, apiKey };
+		const postReq = user !== null && typeof user === 'object' ? { _id: user._id, msgTextInput } : { msgTextInput };
 		await makeAxiosReq
 			.post('/chat', postReq)
 			.then((res) => {
