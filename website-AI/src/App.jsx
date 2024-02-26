@@ -12,9 +12,9 @@ import { AuthProvider } from './hooks/useAuth';
 import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
-	const [errCode, setErrCode] = useState(404);
-	const [errMsg, setErrMsg] = useState('Oops! Đã có lỗi xảy ra!');
-	const [errStack, setErrStack] = useState(`Không tìm thấy trang này`);
+	const [errCode] = useState(404);
+	const [errMsg] = useState('Oops! Đã có lỗi xảy ra!');
+	const [errStack] = useState(`Không tìm thấy trang này`);
 
 	return (
 		<AuthProvider>
