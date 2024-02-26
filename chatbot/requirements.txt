@@ -1,8 +1,9 @@
 torch
 flask
-transformers
-underthesea
+transformers[tokenizers]
+scikit-learn
 numpy
 pandas
 pymongo
 pymongo[srv]
+flask_cors

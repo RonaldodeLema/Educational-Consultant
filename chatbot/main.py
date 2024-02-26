@@ -1,6 +1,5 @@
 from app.adapters.controllers import app
 from app.config import DevelopmentConfig, ProductionConfig
-from app.core.utils.retriever import RetrievalQA
 from flask_cors import CORS
 
 

@@ -1,4 +1,3 @@
-import pandas as pd
 from app.core.utils.retriever import RetrievalQA
 from app.core.utils.models import BiLSTMReader
 from app.config import Config

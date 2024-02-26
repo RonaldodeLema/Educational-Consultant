@@ -1,7 +1,6 @@
 from app.core.qa_services import QuestionAnsweringSystem
 from app.config import Config
 from app.core.utils.finetuning import FineTuningReader, FineTuningRetrieval
-import pandas as pd
 import os
 class QAUseCase:
     def __init__(self,organization_name="default"):
