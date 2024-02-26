@@ -1,0 +1,22 @@
+version: '1.0'
+
+services:
+  chatbot:
+    image: chatbot:latest  
+    container_name: chatbot
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development 
+      - FLASK_APP=main.py  
+   
+
+  website-ai:
+    image: website-ai:latest  
+    container_name: website-ai
+    ports:
+      - "4000:4000" 
+    stdin_open: true  
+    tty: true 
+    depends_on:
+      - chatbot 
