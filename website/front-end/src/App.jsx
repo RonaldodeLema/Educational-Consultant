@@ -22,16 +22,17 @@ import './index.css';
 const App = () => {
 	const [fixedData, setFixedData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [errorMessage, setErrorMessage] = useState('Không tìm thấy');
-	const [errorCode, setErrorCode] = useState(404);
-	const [errorStack, setErrorStack] = useState('Oops! Đã có lỗi xảy ra');
-
 	const [messages, setMessages] = useState([
 		{
 			side: `left`,
 			text: `Chào bạn, mình là <b><i>5AceEdu</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
 		},
 	]);
+	const [chatAble, setChatAble] = useState(1);
+
+	const [errorMessage, setErrorMessage] = useState('Không tìm thấy');
+	const [errorCode, setErrorCode] = useState(404);
+	const [errorStack, setErrorStack] = useState('Oops! Đã có lỗi xảy ra');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -71,7 +72,7 @@ const App = () => {
 					<Route path="testimonial" element={<TestimonialPage fixedData={fixedData} />} />
 					<Route
 						path="chat-with-ai"
-						element={<ChatPage messages={messages} setMessages={setMessages} fixedData={fixedData} />}
+						element={<ChatPage messages={messages} setMessages={setMessages} chatAble={chatAble} setChatAble={setChatAble} fixedData={fixedData} />}
 					/>
 				</Route>
 				<Route path="/signin" element={<SignIn fixedData={fixedData} />} />
