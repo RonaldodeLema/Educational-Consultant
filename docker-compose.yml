@@ -2,7 +2,9 @@ version: '1.0'
 
 services:
   chatbot:
-    image: chatbot:latest  
+    build: ./chatbot
+    volumes:
+      - ./chatbot:/app
     container_name: chatbot
     ports:
       - "5000:5000"
@@ -11,12 +13,32 @@ services:
       - FLASK_APP=main.py  
    
 
-  website-ai:
-    image: website-ai:latest  
-    container_name: website-ai
+  website-AI:
+    build: ./website-AI
+    volumes:
+      - ./website-AI:/app
+    container_name: website-AI
     ports:
       - "4000:4000" 
-    stdin_open: true  
-    tty: true 
     depends_on:
       - chatbot 
+  
+  website-backend:
+    build: ./website/back-end
+    volumes:
+      - ./website-backend:/app
+    container_name: website-backend
+    ports:
+      - "1119:1119"
+    depends_on:
+      - chatbot
+
+  website-frontend:
+    build: ./website/front-end
+    volumes:
+      - ./website-frontend:/app
+    container_name: website-frontend
+    ports:
+      - "4001:4001"
+    depends_on:
+      - website-backend
