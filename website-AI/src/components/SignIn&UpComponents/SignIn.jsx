@@ -1,5 +1,5 @@
 import makeAxiosReq from '../../apis/makeAxiosReq';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { SocialContainer } from './SocialContainer';
@@ -7,7 +7,7 @@ import { SignInBodyForm } from './SignInBodyForm';
 import { OverlayComponent } from './OverlayComponent';
 import { useAuth } from '../../hooks/useAuth';
 
-export const SignIn = ({ setUser }) => {
+export const SignIn = () => {
 	const [error, setError] = useState('');
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');

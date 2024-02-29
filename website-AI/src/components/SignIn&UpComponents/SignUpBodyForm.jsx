@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 export const SignUpBodyForm = ({ setUsername, password, setPassword, repassword, setRepassword, error }) => {
 	return (
 		<>

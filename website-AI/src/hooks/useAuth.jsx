@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
 			logout,
 			updateLocalStorageUser,
 		}),
-		[user],
+		[user, signin, logout, updateLocalStorageUser],
 	);
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

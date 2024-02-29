@@ -12,9 +12,7 @@ export const Details = () => {
 			>
 				<div className="container">
 					<Link to={'/'}>
-						<a className="navbar-brand" href="#">
 							<img src="/images/navbar-logo.svg" alt="" />
-						</a>
 					</Link>
 				</div>
 			</nav>

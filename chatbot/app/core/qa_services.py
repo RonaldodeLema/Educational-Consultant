@@ -1,7 +1,6 @@
 from app.core.utils.retriever import RetrievalQA
 from app.core.utils.models import BiLSTMReader
 from transformers import AutoTokenizer
-import re
 
 import torch
 
@@ -43,7 +42,7 @@ class QuestionAnsweringSystem:
 
         answer = predicted_answer
         if("</s>" in predicted_answer or "<s>" in predicted_answer):
-            answer = predicted_answer.replace(query,"").replace("</s>","").replace("<s>","").replace("<pad>","").strip()
+            answer = predicted_answer.replace(query.replace("?",""),"").replace("</s>","").replace("<s>","").replace("<pad>","").replace("?","").strip()
 
         return {
             'predicted_answer': answer,
