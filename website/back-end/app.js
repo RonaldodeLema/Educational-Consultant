@@ -32,7 +32,7 @@ app.use(session({
     cookie: { maxAge: 259_200_000 }
 }));
 
-const whitelist = ['http://localhost:4001', 'http://add-the-other-here.com'];
+const whitelist = ['http://localhost:4001', 'http://localhost:4000','http://add-the-other-here.com'];
 const corsOptions = {
     origin: (origin, callback) => {
         if (whitelist.includes(origin)) {

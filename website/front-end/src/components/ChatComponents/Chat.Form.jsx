@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import makeAxiosReq from '../../apis/makeAxiosReq';
 
-const Form = ({ setMessages, chatLimitation, user }) => {
+const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, user }) => {
 	const maxDigit = 200;
 	const [msgText, setMsgText] = useState('');
-	const [chatAble, setChatAble] = useState(1);
 	const [disabledBtn, setDisabledBtn] = useState(false);
 	const [disabledInput, setDisabledInput] = useState(false);
 
@@ -38,7 +37,7 @@ const Form = ({ setMessages, chatLimitation, user }) => {
 					`Bạn đã đạt giới hạn số lượng tin nhắn của mỗi phiên. Hãy khởi động lại phiên mới.`,
 				);
 			})
-			.catch((err) => console.error(err.message));
+			.catch((err) => console.error('error of axios post req: ' + err.message));
 	};
 
 	return (
