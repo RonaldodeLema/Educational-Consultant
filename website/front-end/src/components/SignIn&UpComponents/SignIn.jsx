@@ -1,6 +1,7 @@
 import makeAxiosReq from '../../apis/makeAxiosReq';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 import Navigation from '../HomeComponents/Navigation';
 import Footer from '../HomeComponents/Footer';
@@ -15,7 +16,19 @@ export const SignIn = ({ fixedData }) => {
 	const [password, setPassword] = useState('');
 	const { login } = useAuth();
 
+	const alert = useAlert();
 	const navigate = useNavigate();
+	const location = useLocation();
+
+	const msg = location.state?.alert?.msg;
+	const type = location.state?.alert?.type;
+
+	useEffect(() => {
+		if (msg && type) {
+			alert.show(msg, { type });
+		}
+		navigate(location.pathname, { replace: true, state: {} });
+	}, [msg, type, alert]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -40,7 +53,7 @@ export const SignIn = ({ fixedData }) => {
 				<div className="container" id="container">
 					<div className="form-container log-in-container">
 						<form onSubmit={handleSubmit}>
-							<h1 style={{marginBottom: '4rem'}}>Đăng nhập</h1>
+							<h1 style={{ marginBottom: '4rem' }}>Đăng nhập</h1>
 							{/* <SocialContainer /> */}
 							<SignInBodyForm setUsername={setUsername} setPassword={setPassword} error={error} />
 						</form>

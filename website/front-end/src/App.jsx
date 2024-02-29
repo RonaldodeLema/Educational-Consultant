@@ -72,7 +72,15 @@ const App = () => {
 					<Route path="testimonial" element={<TestimonialPage fixedData={fixedData} />} />
 					<Route
 						path="chat-with-ai"
-						element={<ChatPage messages={messages} setMessages={setMessages} chatAble={chatAble} setChatAble={setChatAble} fixedData={fixedData} />}
+						element={
+							<ChatPage
+								messages={messages}
+								setMessages={setMessages}
+								chatAble={chatAble}
+								setChatAble={setChatAble}
+								fixedData={fixedData}
+							/>
+						}
 					/>
 				</Route>
 				<Route path="/signin" element={<SignIn fixedData={fixedData} />} />
