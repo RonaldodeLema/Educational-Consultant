@@ -8,7 +8,6 @@ import secrets
 from datetime import datetime, timedelta
 import pandas as pd
 import os
-from flask_cors import CORS
 app = Flask(__name__)
 app.config.from_object(Config)
 

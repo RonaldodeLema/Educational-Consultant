@@ -1,7 +1,7 @@
 torch
 flask
-transformers
-underthesea
+transformers[tokenizers]
+scikit-learn
 numpy
 pandas
 pymongo
