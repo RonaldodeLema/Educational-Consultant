@@ -12,12 +12,9 @@ services:
       - FLASK_ENV=development 
       - FLASK_APP=main.py  
    
-
-  website-AI:
-    build: ./website-AI
-    volumes:
-      - ./website-AI:/app
-    container_name: website-AI
+  website-ai:
+    build: ./website-ai
+    container_name: website-ai
     ports:
       - "4000:4000" 
     depends_on:
@@ -25,8 +22,6 @@ services:
   
   website-backend:
     build: ./website/back-end
-    volumes:
-      - ./website-backend:/app
     container_name: website-backend
     ports:
       - "1119:1119"
@@ -35,8 +30,6 @@ services:
 
   website-frontend:
     build: ./website/front-end
-    volumes:
-      - ./website-frontend:/app
     container_name: website-frontend
     ports:
       - "4001:4001"
