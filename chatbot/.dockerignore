@@ -11,3 +11,5 @@ __pycache__/
 Dockerfile
 docker-compose.yml
 
+gpt-2/
+phobert-finetune/
