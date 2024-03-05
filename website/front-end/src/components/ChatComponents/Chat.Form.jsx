@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 import makeAxiosReq from '../../apis/makeAxiosReq';
 
-const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, botType, setBotType, handleBotType, user }) => {
+const Form = ({
+	setMessages,
+	chatLimitation,
+	chatAble,
+	setChatAble,
+	botType,
+	setBotType,
+	botType_v2,
+	setBotType_v2,
+	handleBotType,
+	user,
+}) => {
 	const maxDigit = 200;
 	const [msgText, setMsgText] = useState('');
 	const [disabledBtn, setDisabledBtn] = useState(false);
 	const [disabledInput, setDisabledInput] = useState(false);
-	const botTypes = ['Model 1', 'Model 2', 'Model 3'];
+	const botTypes = ['GPT2', 'PhoBERT', 'BILSTM', 'VIMRC'];
+	const botTypes_v2 = ['TFIDF', 'BM25'];
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -19,7 +31,10 @@ const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, botType, set
 	const botResponse = async (msgTextInput) => {
 		setDisabledBtn(true);
 		appendMessage('loading left', 'Đợi mình suy nghĩ chút nhé!');
-		const postReq = user !== null && typeof user === 'object' ? { _id: user._id, msgTextInput } : { msgTextInput };
+		const postReq =
+			user !== null && typeof user === 'object'
+				? { _id: user._id, msgTextInput, receiver: botType.toLowerCase(), reader: botType_v2.toLowerCase() }
+				: { msgTextInput, receiver: botType.toLowerCase(), reader: botType_v2.toLowerCase() };
 		// Task: add the flag for req
 		await makeAxiosReq
 			.post('/chat', postReq)
@@ -70,6 +85,32 @@ const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, botType, set
 				<ul className="dropdown-menu">
 					{botTypes
 						.filter((type) => type !== botType)
+						.map((type, i, arr) => (
+							<React.Fragment key={i}>
+								<li>
+									<a className="dropdown-item" onClick={(e) => handleBotType(e.target.text, true)}>
+										{type}
+									</a>
+								</li>
+								{i < arr.length - 1 && (
+									<li>
+										<hr className="dropdown-divider" />
+									</li>
+								)}
+							</React.Fragment>
+						))}
+				</ul>
+				<button
+					className={`btn btn-outline-secondary dropdown-toggle ${disabledInput ? 'disabled' : ''}`}
+					type="button"
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+				>
+					{botType_v2}
+				</button>
+				<ul className="dropdown-menu">
+					{botTypes_v2
+						.filter((type) => type !== botType_v2)
 						.map((type, i, arr) => (
 							<React.Fragment key={i}>
 								<li>

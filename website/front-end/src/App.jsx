@@ -22,7 +22,8 @@ import './index.css';
 const App = () => {
 	const [fixedData, setFixedData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [botType, setBotType] = useState(localStorage.getItem('botType') || 'Model 1');
+	const [botType, setBotType] = useState(localStorage.getItem('botType') || 'GPT-2');
+	const [botType_v2, setBotType_v2] = useState(localStorage.getItem('botType_v2') || 'TFIDF');
 	const [messages, setMessages] = useState([]);
 	const [chatAble, setChatAble] = useState(1);
 	const [preLoading, setPreLoading] = useState(1500);
@@ -33,6 +34,7 @@ const App = () => {
 
 	useEffect(() => {
 		localStorage.setItem('botType', botType);
+		localStorage.setItem('botType_v2', botType_v2);
 		setMessages([
 			{
 				side: `left`,
@@ -41,11 +43,16 @@ const App = () => {
 		]);
 	}, [botType]);
 
-	const handleBotType = (name) => {
+	const handleBotType = (name, flag) => {
+		if (!flag) {
+			setBotType_v2(name)
+			return;
+		}
 		setPreLoading(500);
 		window.location.reload(false);
 		setBotType(name);
 	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const startTime = performance.now();
@@ -96,6 +103,8 @@ const App = () => {
 								fixedData={fixedData}
 								botType={botType}
 								setBotType={setBotType}
+								botType_v2={botType_v2}
+								setBotType_v2={setBotType_v2}
 								handleBotType={handleBotType}
 							/>
 						}

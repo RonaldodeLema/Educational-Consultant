@@ -2,7 +2,17 @@ import React, { useState } from 'react';
 import { useAuth } from './../../hooks/useAuth';
 import Form from './Chat.Form';
 
-const Body = ({ messages, setMessages, chatAble, setChatAble, botType, setBotType, handleBotType }) => {
+const Body = ({
+	messages,
+	setMessages,
+	chatAble,
+	setChatAble,
+	botType,
+	setBotType,
+	botType_v2,
+	setBotType_v2,
+	handleBotType,
+}) => {
 	const { user } = useAuth();
 
 	const chatLimitation = user ? 20 : 10;
@@ -53,6 +63,8 @@ const Body = ({ messages, setMessages, chatAble, setChatAble, botType, setBotTyp
 						setChatAble={setChatAble}
 						botType={botType}
 						setBotType={setBotType}
+						botType_v2={botType_v2}
+						setBotType_v2={setBotType_v2}
 						handleBotType={handleBotType}
 						user={user}
 					/>
