@@ -1,4 +1,5 @@
 import { registerUser } from '../../apis/makeAxiosReq';
+
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -56,6 +57,21 @@ export const SignUp = () => {
 		// 	setError('Đã xảy ra lỗi. Vui lòng thử lại.');
 		// 	console.error(error);
 		// }
+
+		try {
+			// Call the registerUser function from your API module
+			const result = await registerUser(username.trim(), password.trim(), repassword.trim());
+			console.log(result);
+			// Check if the registration was successful
+			if (result.status === 200) {
+			  navigate('/signin');
+			} else {
+			  setError('Đăng ký không thành công. Vui lòng thử lại.');
+			}
+		  } catch (error) {
+			setError('Đã xảy ra lỗi. Vui lòng thử lại.');
+			console.error(error);
+		  }
 	};
 
 	return (

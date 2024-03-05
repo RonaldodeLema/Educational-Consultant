@@ -1,6 +1,3 @@
-from flask import Flask, current_app, g
-from pymongo import MongoClient
-
 class Config:
     DEBUG = False
     RETRIEVER_PATH = './app/models/default/default_retriever.pkl'
@@ -15,6 +12,21 @@ class Config:
     MONGO_URI = 'mongodb+srv://vanthao000009:h5xEp5fXFWdQlqow@clusterapikey.cdjupaf.mongodb.net/?retryWrites=true&w=majority'
     MONGO_DB = 'clusterapikey'
 
+
+    TFIDF_PATH = './app/models/tfidf_retriever.pkl'
+    BM25_PATH = './app/models/bm25_retriever.pkl'
+
+    BILSTM_PATH = './app/models/bilstm_reader.pth'
+    PHOBERT_PATH = './app/models/phobert-finetune'
+    GPT2_PATH = './app/models/gpt-2'
+    VIMRC_PATH = './app/models/vimrc'
+
+    BERT_NAME = 'vinai/phobert-base'
+    GPT2_NAME = 'NlpHUST/gpt2-vietnamese'
+    VIMRC_NAME = 'nguyenvulebinh/vi-mrc-base'
+
+    USERNAME = 'fiveace'
+    TOKEN = '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'
 class DevelopmentConfig(Config):
     DEBUG = True
 

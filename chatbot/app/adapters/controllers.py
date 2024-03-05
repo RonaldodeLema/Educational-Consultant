@@ -209,6 +209,41 @@ def qa():
         'score': answer.get('score', 0)
     }})
 
+@app.route('/api/qa-systemv2', methods=['POST'])
+@token_required
+def qav2():
+    data = request.get_json()
+    question = data.get('question', '')
+    mode_retriever = data.get('mode_retriever', 'tfidf')
+    mode_reader = data.get('mode_reader', 'bilstm')
+
+    # Check if the word generation limit is exceeded for the current user
+    if rate_limit_exceeded(g.user['username'], 'word_generatsion_limits', timedelta(hours=1), 10000):
+        return jsonify({'message': 'Word generation limit exceeded in 1 hour'}), 429
+    
+    model_path = Config.MODEL_PATH + g.user['username']
+    org_name = "default"
+    if os.path.exists(model_path):
+        org_name = g.user['username']
+
+    use_case = QAUseCase(organization_name=org_name)
+    answer = use_case.executev2(question,mode_retriever=mode_retriever,mode_reader=mode_reader)
+
+    # # Count the number of words in the generated answer
+    word_count = len(answer['answer'].split())
+
+    # # Increase the word count in the word generation limit
+    update_word_limit(g.user['username'], 'word_generation_limits', word_count)
+
+    # Save the question, answer, and context in MongoDB
+    record_qa(question, answer['answer'], answer.get('context', ''), g.user['username'], answer.get('score', 0))
+
+    return jsonify({'response': 
+        answer,
+    })
+
+
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'csv'}
 
