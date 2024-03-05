@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import makeAxiosReq from '../../apis/makeAxiosReq';
 
-const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, user }) => {
+const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, botType, setBotType, handleBotType, user }) => {
 	const maxDigit = 200;
 	const [msgText, setMsgText] = useState('');
 	const [disabledBtn, setDisabledBtn] = useState(false);
 	const [disabledInput, setDisabledInput] = useState(false);
+	const botTypes = ['Model 1', 'Model 2', 'Model 3'];
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -19,6 +20,7 @@ const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, user }) => {
 		setDisabledBtn(true);
 		appendMessage('loading left', 'Đợi mình suy nghĩ chút nhé!');
 		const postReq = user !== null && typeof user === 'object' ? { _id: user._id, msgTextInput } : { msgTextInput };
+		// Task: add the flag for req
 		await makeAxiosReq
 			.post('/chat', postReq)
 			.then((res) => {
@@ -57,8 +59,34 @@ const Form = ({ setMessages, chatLimitation, chatAble, setChatAble, user }) => {
 				<span className={`char-count input-group-text ${disabledInput ? 'disabled' : ''}`}>
 					{msgText.length}/{maxDigit}
 				</span>
-				<button type="submit" className="btn btn-default msger-send-btn" disabled={disabledBtn}>
-					<span>Send</span>
+				<button
+					className={`btn btn-outline-secondary dropdown-toggle ${disabledInput ? 'disabled' : ''}`}
+					type="button"
+					data-bs-toggle="dropdown"
+					aria-expanded="false"
+				>
+					{botType}
+				</button>
+				<ul className="dropdown-menu">
+					{botTypes
+						.filter((type) => type !== botType)
+						.map((type, i, arr) => (
+							<React.Fragment key={i}>
+								<li>
+									<a className="dropdown-item" onClick={(e) => handleBotType(e.target.text)}>
+										{type}
+									</a>
+								</li>
+								{i < arr.length - 1 && (
+									<li>
+										<hr className="dropdown-divider" />
+									</li>
+								)}
+							</React.Fragment>
+						))}
+				</ul>
+				<button type="submit" className="btn btn-outline-info msger-send-btn px-4" disabled={disabledBtn}>
+					<span>Gửi</span>
 				</button>
 			</div>
 		</form>

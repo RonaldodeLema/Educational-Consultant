@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useAuth } from './../../hooks/useAuth';
 import Form from './Chat.Form';
 
-const Body = ({ messages, setMessages, chatAble, setChatAble }) => {
+const Body = ({ messages, setMessages, chatAble, setChatAble, botType, setBotType, handleBotType }) => {
 	const { user } = useAuth();
 
 	const chatLimitation = user ? 20 : 10;
 	const refreshPage = () => window.location.reload(false);
 
 	return (
-		<div className="chat-page container-fluid p-0 m-0 d-flex justify-content-center mt-2 mh-100">
+		<div className="chat-page container-fluid p-0 m-0 d-flex justify-content-center mt-3 mh-100">
 			{/* <div className="col-lg-3">{user && <button onClick={handleLogout}>Logout</button>}</div> */}
 			<div className="col" />
 			<div className="col-8 d-flex justify-content-center">
@@ -51,6 +51,9 @@ const Body = ({ messages, setMessages, chatAble, setChatAble }) => {
 						chatLimitation={chatLimitation}
 						chatAble={chatAble}
 						setChatAble={setChatAble}
+						botType={botType}
+						setBotType={setBotType}
+						handleBotType={handleBotType}
 						user={user}
 					/>
 				</section>

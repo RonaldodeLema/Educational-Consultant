@@ -38,7 +38,7 @@ Cách 2:
 
 - Chạy lệnh `npm run dev`  hoặc  `pnpm run dev` hoặc  `yarn run dev`
 
-- Đổi port trong lệnh này có tác dụng tương tự cách 1
+- Đổi port trong lệnh này có tác dụng tương tự cách 1.
 
 ## License
 

@@ -22,18 +22,30 @@ import './index.css';
 const App = () => {
 	const [fixedData, setFixedData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [messages, setMessages] = useState([
-		{
-			side: `left`,
-			text: `Chào bạn, mình là <b><i>5AceEdu</i></b> bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
-		},
-	]);
+	const [botType, setBotType] = useState(localStorage.getItem('botType') || 'Model 1');
+	const [messages, setMessages] = useState([]);
 	const [chatAble, setChatAble] = useState(1);
+	const [preLoading, setPreLoading] = useState(1500);
 
 	const [errorMessage, setErrorMessage] = useState('Không tìm thấy');
 	const [errorCode, setErrorCode] = useState(404);
 	const [errorStack, setErrorStack] = useState('Oops! Đã có lỗi xảy ra');
 
+	useEffect(() => {
+		localStorage.setItem('botType', botType);
+		setMessages([
+			{
+				side: `left`,
+				text: `Chào bạn, mình là <b><i>5AceEdu</i></b> (${botType}) bot được huấn luyện để hỗ trợ trả lời cho bạn các vấn đề về tuyển sinh 😄`,
+			},
+		]);
+	}, [botType]);
+
+	const handleBotType = (name) => {
+		setPreLoading(500);
+		window.location.reload(false);
+		setBotType(name);
+	};
 	useEffect(() => {
 		const fetchData = async () => {
 			const startTime = performance.now();
@@ -48,9 +60,12 @@ const App = () => {
 			const endTime = performance.now();
 			const executionTime = endTime - startTime;
 			if (1500 - executionTime > 0) {
-				setTimeout(() => {
-					setIsLoading(false);
-				}, 1500 - executionTime);
+				setTimeout(
+					() => {
+						setIsLoading(false);
+					},
+					preLoading - executionTime < 1000 ? preLoading : preLoading - executionTime,
+				);
 			}
 		};
 		fetchData();
@@ -72,7 +87,18 @@ const App = () => {
 					<Route path="testimonial" element={<TestimonialPage fixedData={fixedData} />} />
 					<Route
 						path="chat-with-ai"
-						element={<ChatPage messages={messages} setMessages={setMessages} chatAble={chatAble} setChatAble={setChatAble} fixedData={fixedData} />}
+						element={
+							<ChatPage
+								messages={messages}
+								setMessages={setMessages}
+								chatAble={chatAble}
+								setChatAble={setChatAble}
+								fixedData={fixedData}
+								botType={botType}
+								setBotType={setBotType}
+								handleBotType={handleBotType}
+							/>
+						}
 					/>
 				</Route>
 				<Route path="/signin" element={<SignIn fixedData={fixedData} />} />

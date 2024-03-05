@@ -1,5 +1,4 @@
-import React from 'react';
-
+import Scroll2EleWithId from '../Scroll2EleWithId';
 const CourseItem = ({
 	dataWowDelay,
 	coursePrice,
@@ -16,14 +15,14 @@ const CourseItem = ({
 					<img className="img-fluid" src={courseThumbnail} alt="" />
 					<div className="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
 						<a
-							href="#"
+							onClick={() => Scroll2EleWithId('root')}
 							className="flex-shrink-0 btn btn-sm btn-primary px-3 border-end"
 							style={{ borderRadius: '30px 0 0 30px' }}
 						>
 							Đọc thêm
 						</a>
 						<a
-							href="#"
+							onClick={() => Scroll2EleWithId('root')}
 							className="flex-shrink-0 btn btn-sm btn-primary px-3"
 							style={{ borderRadius: '0 30px 30px 0' }}
 						>
