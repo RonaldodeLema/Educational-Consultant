@@ -230,13 +230,13 @@ def qav2():
     answer = use_case.executev2(question,mode_retriever=mode_retriever,mode_reader=mode_reader)
 
     # # Count the number of words in the generated answer
-    # word_count = len(answer.split())
+    word_count = len(answer['answer'].split())
 
     # # Increase the word count in the word generation limit
-    # update_word_limit(g.user['username'], 'word_generation_limits', word_count)
+    update_word_limit(g.user['username'], 'word_generation_limits', word_count)
 
     # Save the question, answer, and context in MongoDB
-    # record_qa(question, answer['predicted_answer'], answer.get('context', ''), g.user['username'], answer.get('score', 0))
+    record_qa(question, answer['answer'], answer.get('context', ''), g.user['username'], answer.get('score', 0))
 
     return jsonify({'response': 
         answer,
