@@ -1,3 +1,2 @@
-models/
-
+models/*
 app/models/gpt-2

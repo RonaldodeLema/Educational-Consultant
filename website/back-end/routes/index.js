@@ -53,15 +53,17 @@ router.post('/login', async (req, res, next) => {
 });
 
 router.post('/chat', async (req, res, next) => {
-  const { _id, msgTextInput } = req.body;
+  const { _id, msgTextInput, receiver, reader } = req.body;
   if (_id) await MessageBase.create({ msgContent: msgTextInput, sender: _id, sendAt: Date.now() });
   instance.defaults.headers.common.Authorization = req.cookies.apiKey;
   await instance.post(process.env.GET_QA_RP, {
-    "question": msgTextInput
+    "question": msgTextInput,
+    "node_retriever": receiver,
+    "node_reader": reader
   })
     .then(async (QA_obj_res) => {
-      const score = QA_obj_res.data.answer.score;
-      const predicted_answer = QA_obj_res.data.answer.predicted_answer;
+      const score = QA_obj_res.data.response.score;
+      const predicted_answer = QA_obj_res.data.response.answer;
       // this line is used to debug
       console.log(`rouge score: ` + score);
       console.log(`predicted_answer: ` + predicted_answer);
