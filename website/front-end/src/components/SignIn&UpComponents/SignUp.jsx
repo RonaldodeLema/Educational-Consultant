@@ -28,7 +28,13 @@ export const SignUp = ({ fixedData }) => {
 		const signUpObj = { username: username.trim(), password: password.trim() };
 		await makeAxiosReq
 			.post('/register', signUpObj)
-			.then((res) => res.data.ok && navigate('/signin'))
+			.then(
+				(res) =>
+					res.data.ok &&
+					navigate('/signin', {
+						state: { alert: { msg: 'Đăng ký tài khoản thành công', type: 'success' } },
+					}),
+			)
 			.catch((err) => {
 				return setError(err.response.data.message);
 			});

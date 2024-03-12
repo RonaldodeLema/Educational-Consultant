@@ -194,25 +194,25 @@
 			{
 				"userImage": "/img/testimonial-1.jpg",
 				"userFullName": "Đỗ Rê Mi",
-				"userLevel": "New",
+				"userLevel": "Người mới",
 				"userComment": "Khóa học rất hay, tôi học được rất nhiều ở đây"
 			},
 			{
 				"userImage": "/img/testimonial-2.jpg",
 				"userFullName": "Đỗ Rê Mon",
-				"userLevel": "Profession",
+				"userLevel": "Chuyên gia",
 				"userComment": "Tôi đã học ở đây rất nhiều lần khóa học rất thú vị"
 			},
 			{
 				"userImage": "/img/testimonial-3.jpg",
 				"userFullName": "Nô Bi Ta",
-				"userLevel": "Profession",
+				"userLevel": "Chuyên gia",
 				"userComment": "Từ một học sinh kém tôi đã đạt hạng 1 nhờ học ở đây"
 			},
 			{
 				"userImage": "/img/testimonial-4.jpg",
 				"userFullName": "Đê khi",
-				"userLevel": "Profession",
+				"userLevel": "Chuyên gia",
 				"userComment": "Tôi đã tham khảo xem anh Ta đã học ở đâu mà tiến bộ nhanh để tham gia. Thật sự các khóa học rất bổ ích"
 			}
 		]

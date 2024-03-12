@@ -1,6 +1,6 @@
 .venv
 
-**/__pycache__/
+__pycache__
 
 .py[cod]
 
@@ -15,3 +15,6 @@ vscode/
 tdtu/
 
 temp/
+
+gpt-2/
+phobert-finetune/

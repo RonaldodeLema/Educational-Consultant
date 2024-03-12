@@ -1,38 +1,4 @@
-import { useState } from 'react';
-
 export const SignUpBodyForm = ({ setUsername, password, setPassword, repassword, setRepassword, error }) => {
-	const handleRegister = async (e) => {
-		e.preventDefault();
-		if (password !== repassword) alert.error(`Xác nhận lại mật khẩu và mật khẩu không khớp`);
-
-		await makeAxiosReq
-			.post('/register', { username, password })
-			.then((res) => res.data.ok && navigate('/login'))
-			.catch((err) => {
-				if (!err.response) console.error(err);
-
-				const errStatus = err.response.status;
-
-				switch (errStatus) {
-					case 404:
-						err.code && setErrorCode(err.response.status);
-						err.name && setErrorStack(err.response.statusText);
-						err.message && setErrorMessage(err.response.data.message);
-						break;
-					case 409:
-						alert.error(err.response.data.message);
-						break;
-					default:
-						err.code && setErrorCode(err.response.status);
-						err.name && setErrorStack(err.response.statusText);
-						err.message && setErrorMessage(err.response.data.message);
-						break;
-				}
-
-				if (errStatus !== 409) navigate('/error');
-			});
-	};
-
 	return (
 		<>
 			<label htmlFor="username" />
@@ -51,6 +17,7 @@ export const SignUpBodyForm = ({ setUsername, password, setPassword, repassword,
 				placeholder="Mật khẩu"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
+				autoComplete="off"
 			/>
 			<label htmlFor="repassword" />
 			<input
@@ -60,6 +27,7 @@ export const SignUpBodyForm = ({ setUsername, password, setPassword, repassword,
 				placeholder="Xác nhận mật khẩu"
 				value={repassword}
 				onChange={(e) => setRepassword(e.target.value)}
+				autoComplete="off"
 			/>
 			{error && (
 				<p

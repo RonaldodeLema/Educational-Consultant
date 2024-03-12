@@ -1,9 +1,12 @@
 torch
 flask
-transformers[tokenizers]
+transformers
 scikit-learn
 numpy
 pandas
 pymongo
 pymongo[srv]
 flask-cors
+nltk
+rank_bm25
+underthesea
