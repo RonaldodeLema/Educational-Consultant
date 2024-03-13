@@ -13,7 +13,7 @@ const ContactPage = ({ fixedData }) => {
 		<>
 			<Navigation data={fixedData.Header} />
 			<Header currentPath={'/contact'} currentTitle={'Contact'} headerTitle={'Liên hệ'} />
-			<Contact />
+			<Contact data={fixedData.Footer}/>
 			<Footer data={fixedData.Footer} />
 			<Back2TopBtn />
 		</>
