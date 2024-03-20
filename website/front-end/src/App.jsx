@@ -22,8 +22,8 @@ import './index.css';
 const App = () => {
 	const [fixedData, setFixedData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [botType, setBotType] = useState(localStorage.getItem('botType') || 'GPT-2');
-	const [botType_v2, setBotType_v2] = useState(localStorage.getItem('botType_v2') || 'TFIDF');
+	const [botType, setBotType] = useState(localStorage.getItem('botType') || 'VIMRC');
+	const [botType_v2, setBotType_v2] = useState(localStorage.getItem('botType_v2') || 'BM25');
 	const [messages, setMessages] = useState([]);
 	const [chatAble, setChatAble] = useState(1);
 	const [preLoading, setPreLoading] = useState(1500);
