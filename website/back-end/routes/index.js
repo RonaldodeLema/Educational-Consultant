@@ -68,7 +68,7 @@ router.post('/chat', async (req, res, next) => {
       console.log(`rouge score: ` + score);
       console.log(`predicted_answer: ` + predicted_answer);
       // this line is used to debug
-      return score <= 0.4
+      return predicted_answer === ''
         ? res.status(200).json({ 'message': 'Mình chưa được huấn luyện để trả lời vấn đề này, bạn hỏi câu hỏi khác giúp mình nhé!' })
         : res.status(200).json({ 'message': predicted_answer });
     })
