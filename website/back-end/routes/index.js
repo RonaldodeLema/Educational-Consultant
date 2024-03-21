@@ -70,7 +70,7 @@ router.post('/chat', async (req, res, next) => {
       // this line is used to debug
       return predicted_answer === ''
         ? res.status(200).json({ 'message': 'Mình chưa được huấn luyện để trả lời vấn đề này, bạn hỏi câu hỏi khác giúp mình nhé!' })
-        : predicted_answer.split('?').length > 1 ? res.status(200).json({ 'message': predicted_answer.split('?')[1] }) : res.status(200).json({ 'message': predicted_answer });
+        : res.status(200).json({ 'message': predicted_answer.split('?').slice(-1) });
     })
     .catch((QA_obj_errer) => {
       // add throw error logic
